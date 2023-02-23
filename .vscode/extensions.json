@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "nsoult.typescript-imports-sort",
+    "dbaeumer.vscode-eslint",
+    "knisterpeter.vscode-commitizen"
+  ]
+}

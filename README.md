@@ -37,3 +37,15 @@ Templates are page-level objects that place components into a layout and articul
 5. Pages.
 
 Pages are specific instances of templates that show what a UI looks like with real representative content in place.
+
+## About project
+
+### Plugins added:
+
+- Prettier
+- Eslint
+- Typescript sort
+
+### Plugins To consider:
+
+- Commitlint
