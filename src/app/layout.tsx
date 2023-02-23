@@ -1,9 +1,8 @@
 // Root Layout: https://beta.nextjs.org/docs/routing/pages-and-layouts#root-layout-required
-
-import Container from "@/atoms/container";
-import Footer from "@/organisms/footer";
-import Navigation from "@/organisms/navigation";
+import { Lato } from "@next/font/google";
 import "normalize.css/normalize.css";
+
+const lato = Lato({ weight: "400", subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -17,18 +16,8 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>
-        <Container maxWidth="xl">
-          <Navigation />
-        </Container>
-
-        <Container maxWidth="2xl">
-          <main>{children}</main>
-        </Container>
-
-        <Container maxWidth="xl">
-          <Footer />
-        </Container>
+      <body className={lato.className}>
+        <main>{children}</main>
       </body>
     </html>
   );

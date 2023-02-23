@@ -1,6 +1,7 @@
+import Logo from "@/atoms/logo";
 import Menu from "@/atoms/menu";
 import MenuLink from "@/atoms/menuLink";
-import Image from "next/image";
+import Search from "@/molecules/search";
 
 type Props = {};
 
@@ -18,22 +19,6 @@ const menuStyles = {
 const menuLinkStyles = {
   marginRight: "16px",
 };
-
-function Logo() {
-  return (
-    <div>
-      <span>Logo</span>
-    </div>
-  );
-}
-
-function Search() {
-  return (
-    <div>
-      <span>Search</span>
-    </div>
-  );
-}
 
 function MenuWrapper() {
   return (
@@ -54,7 +39,7 @@ function MenuWrapper() {
   );
 }
 
-export default function Navigation({}: Props) {
+export default function Navigation(props: Props) {
   return (
     <nav style={navStyles}>
       <Logo />
