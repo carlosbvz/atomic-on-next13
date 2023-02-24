@@ -1,0 +1,16 @@
+.nav {
+  display: flex;
+  padding: 64px 16px;
+  justify-content: space-between;
+}
+
+.menu-wrapper {
+  display: flex;
+}
+.menu {
+  display: flex;
+}
+.menu-links {
+  margin-right: 16px;
+  font-size: 18px;
+}
