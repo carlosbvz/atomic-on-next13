@@ -1,0 +1,23 @@
+.button {
+  color: var(--white);
+  border: 0;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Variants */
+.primary {
+  background-color: var(--blue);
+}
+.primary:hover {
+  background-color: var(--darkBlue);
+}
+.secondary {
+  background-color: var(--purple);
+}
+.secondary:hover {
+  background-color: var(--darkPurple);
+}

@@ -1,13 +1,18 @@
-import Logo from "@/atoms/logo";
+import Container from "@/atoms/containers/container";
+import Logo from "@/atoms/logos/logo";
 import Menu from "@/atoms/menu/menu";
-import MenuLink from "@/atoms/menuLink";
+import MenuLink from "@/atoms/menu/menuLink";
 import Search from "@/molecules/search";
 import { Lato } from "@next/font/google";
 import styles from "./navigation.module.css";
 
 const latoBold = Lato({ weight: "700", subsets: ["latin"] });
-
-type Props = {};
+const linksData = [
+  { href: "/", label: "Home" },
+  { href: "/education", label: "Education" },
+  { href: "/nutrition", label: "Nutrition" },
+];
+type NavigationType = {};
 
 function StyledMenuLink(props: { href: string; children?: React.ReactNode }) {
   const { href, children } = props;
@@ -21,25 +26,30 @@ function StyledMenuLink(props: { href: string; children?: React.ReactNode }) {
   );
 }
 
-// TODO: Move text to a translation file
 function MenuWrapper() {
   return (
     <div className={styles["menu-wrapper"]}>
       <Menu className={styles["menu"]}>
-        <StyledMenuLink href="/">Home</StyledMenuLink>
-        <StyledMenuLink href="/education">Education</StyledMenuLink>
-        <StyledMenuLink href="/nutrition">Nutrition</StyledMenuLink>
+        {linksData.map((link) => (
+          <StyledMenuLink key={link.href} href={link.href}>
+            {link.label}
+          </StyledMenuLink>
+        ))}
       </Menu>
       <Search />
     </div>
   );
 }
 
-export default function Navigation(props: Props) {
+export default function Navigation(props: NavigationType) {
   return (
-    <nav className={styles.nav}>
-      <Logo />
-      <MenuWrapper />
-    </nav>
+    <div className={styles["nav-wrapper"]}>
+      <Container maxWidth="2xl">
+        <nav className={styles.nav}>
+          <Logo />
+          <MenuWrapper />
+        </nav>
+      </Container>
+    </div>
   );
 }

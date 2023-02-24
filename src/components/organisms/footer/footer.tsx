@@ -1,5 +1,12 @@
+import Container from "@/atoms/containers/container";
+import styles from "./footer.module.css";
+
 type Props = {};
 
 export default function Footer({}: Props) {
-  return <div>footer</div>;
+  return (
+    <footer className={styles.footer}>
+      <Container maxWidth="2xl">footer</Container>
+    </footer>
+  );
 }

@@ -1,4 +1,4 @@
-import Link, { LinkProps } from "@/atoms/link/link";
+import Link, { LinkProps } from "@/atoms/links/link";
 
 interface Props extends LinkProps {
   children?: React.ReactNode;

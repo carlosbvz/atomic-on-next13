@@ -1,7 +1,7 @@
 export default function ComponentLibrary() {
   return (
     <>
-      <h1>Components Library</h1>
+      <p>Select a component from the left to see details.</p>
     </>
   );
 }

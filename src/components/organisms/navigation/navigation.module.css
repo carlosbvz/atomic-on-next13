@@ -1,3 +1,6 @@
+.nav-wrapper {
+  border-bottom: 1px solid var(--lightGray);
+}
 .nav {
   display: flex;
   padding: 64px 16px;
@@ -9,8 +12,17 @@
 }
 .menu {
   display: flex;
+  align-items: center;
 }
 .menu-links {
   margin-right: 16px;
   font-size: 18px;
+}
+.menu-links a {
+  font-size: 1.25em;
+  color: var(--black);
+}
+.menu-links a:hover {
+  text-decoration: none;
+  color: var(--blue);
 }

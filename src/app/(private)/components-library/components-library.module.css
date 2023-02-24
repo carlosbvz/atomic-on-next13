@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  padding: 64px 16px;
+  justify-content: space-between;
+}
+
+.sidebar {
+  width: 20%;
+}
+.showcase {
+  width: 80%;
+}
