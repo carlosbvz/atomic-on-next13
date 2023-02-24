@@ -2,7 +2,7 @@ import Button from "@/atoms/buttons/button";
 
 type Props = {};
 
-export default function ButtonsPage({}: Props) {
+export default function ButtonsPage(props: Props) {
   return (
     <div>
       <h3>Button Component</h3>
