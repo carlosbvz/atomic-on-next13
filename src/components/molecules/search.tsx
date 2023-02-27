@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/atoms/buttons/button";
+import Button from '@/atoms/buttons/button';
 
 export default function Search() {
   function handleOnClick() {
@@ -9,8 +9,9 @@ export default function Search() {
 
   return (
     <div>
-      <Button onClick={handleOnClick}>Search</Button>
-      <span>Search</span>
+      <Button onClick={handleOnClick} variant="contained">
+        Search
+      </Button>
     </div>
   );
 }

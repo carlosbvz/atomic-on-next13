@@ -19,8 +19,12 @@
       "function": {
         "atomictechd4657d20PreSignup": {
           "deploymentBucketName": "amplify-atomictech-dev-192114-deployment",
-          "s3Key": "amplify-builds/atomictechd4657d20PreSignup-534b307a324176523752-build.zip"
+          "s3Key": "amplify-builds/atomictechd4657d20PreSignup-534b307a324176523752-build.zip",
+          "DOMAINALLOWLIST": "edify.cr"
         }
+      },
+      "api": {
+        "atomictech": {}
       }
     }
   }

@@ -75,6 +75,14 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_atomictechd4657d20PreSignup_DOMAINALLOWLIST": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "atomictechd4657d20PreSignup"
+        }
+      ]
+    },
     "AMPLIFY_function_atomictechd4657d20PreSignup_deploymentBucketName": {
       "usedBy": [
         {

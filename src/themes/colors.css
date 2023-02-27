@@ -3,11 +3,13 @@
   --lightGray: #dfdfdf;
   --white: #ffffff;
   --lightBlue: #00a8e4;
-  --blue: #0069b1;
+  --blue: rgb(0, 105, 177);
   --darkBlue: #005a98;
+  --blueBg: rgba(25, 118, 210, 0.04);
   --red: #d20f55;
   --lightGreen: #779f09;
   --green: #2d4e00;
   --purple: #641580;
   --darkPurple: #2b133f;
+  --purpleBg: rgba(156, 39, 176, 0.04);
 }

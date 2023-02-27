@@ -26,6 +26,7 @@
       "@/organisms/*": ["src/components/organisms/*"],
       "@/sharedtemplates/*": ["src/components/shared-templates/*"],
       "@/sharedlayouts/*": ["src/components/shared-layouts/*"],
+      "@/services/*": ["src/services/*"],
       "@/themes/*": ["src/themes/*"]
     }
   },

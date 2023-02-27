@@ -1,5 +1,6 @@
 .button {
-  color: var(--white);
+  color: var(--blue);
+  background-color: transparent;
   border: 0;
   padding: 8px 16px;
   font-size: 16px;
@@ -8,16 +9,40 @@
   transition: all 0.2s ease-in-out;
 }
 
-/* Variants */
+/* colors */
 .primary {
-  background-color: var(--blue);
+  color: var(--blue);
 }
 .primary:hover {
-  background-color: var(--darkBlue);
+  color: var(--darkBlue);
 }
 .secondary {
-  background-color: var(--purple);
+  color: var(--purple);
 }
 .secondary:hover {
+  color: var(--darkPurple);
+}
+
+/* variants text*/
+.primary.text:hover {
+  background-color: var(--blueBg);
+}
+.secondary.text:hover {
+  background-color: var(--purpleBg);
+}
+
+/* variants contained */
+.primary.contained {
+  background-color: var(--blue);
+  color: var(--white);
+}
+.primary.contained:hover {
+  background-color: var(--darkBlue);
+}
+.secondary.contained {
+  background-color: var(--purple);
+  color: var(--white);
+}
+.secondary.contained:hover {
   background-color: var(--darkPurple);
 }

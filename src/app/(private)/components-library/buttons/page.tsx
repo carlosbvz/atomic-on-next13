@@ -1,4 +1,4 @@
-import Button from "@/atoms/buttons/button";
+import Button from '@/atoms/buttons/button';
 
 type Props = {};
 
@@ -7,10 +7,14 @@ export default function ButtonsPage(props: Props) {
     <div>
       <h3>Button Component</h3>
       <p>Samples:</p>
-      <Button>Primary Button</Button>
+      <Button>Text</Button>
+      <Button variant="contained">Contained</Button>
       <br />
       <br />
-      <Button variant="secondary">Secundary Button</Button>
+      <Button color="secondary">Secondary</Button>
+      <Button color="secondary" variant="contained">
+        Secondary Contanined
+      </Button>
     </div>
   );
 }
