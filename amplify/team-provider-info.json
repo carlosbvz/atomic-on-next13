@@ -1,0 +1,31 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-atomictech-dev-192114-authRole",
+      "UnauthRoleArn": "arn:aws:iam::474215544787:role/amplify-atomictech-dev-192114-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::474215544787:role/amplify-atomictech-dev-192114-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-atomictech-dev-192114-deployment",
+      "UnauthRoleName": "amplify-atomictech-dev-192114-unauthRole",
+      "StackName": "amplify-atomictech-dev-192114",
+      "StackId": "arn:aws:cloudformation:us-east-1:474215544787:stack/amplify-atomictech-dev-192114/0876b110-b63d-11ed-85f3-0a0bcad48579",
+      "AmplifyAppId": "d27kiphce1auq0",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-atomictech-dev-192114-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "atomictechd4657d20": {}
+      },
+      "function": {
+        "atomictechd4657d20PreSignup": {
+          "DOMAINALLOWLIST": "@edify.cr",
+          "deploymentBucketName": "amplify-atomictech-dev-192114-deployment",
+          "s3Key": "amplify-builds/atomictechd4657d20PreSignup-534b307a324176523752-build.zip"
+        }
+      },
+      "api": {
+        "atomictech": {}
+      }
+    }
+  }
+}

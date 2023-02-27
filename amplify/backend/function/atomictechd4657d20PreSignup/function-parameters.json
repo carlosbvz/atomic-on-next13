@@ -1,0 +1,18 @@
+{
+  "trigger": true,
+  "modules": [
+    "email-filter-allowlist"
+  ],
+  "parentResource": "atomictechd4657d20",
+  "functionName": "atomictechd4657d20PreSignup",
+  "resourceName": "atomictechd4657d20PreSignup",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "/snapshot/repo/build/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/PreSignup",
+  "triggerTemplate": "PreSignup.json.ejs",
+  "triggerEventPath": "PreSignup.event.json",
+  "roleName": "atomictechd4657d20PreSignup",
+  "skipEdit": true,
+  "DOMAINALLOWLIST": "@edify.cr",
+  "enableCors": false
+}

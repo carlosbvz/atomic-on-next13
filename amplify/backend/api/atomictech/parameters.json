@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "atomictech",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authatomictechd4657d20",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
