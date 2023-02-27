@@ -3,6 +3,11 @@ import { Lato } from "@next/font/google";
 import "normalize.css/normalize.css";
 import "../themes/global.css";
 
+export const metadata = {
+  title: "Atomic Design on Nextjs 13",
+  description: "Example of how to use Atomic Design on a Nextjs 13 app",
+};
+
 const lato = Lato({ weight: "400", subsets: ["latin"] });
 
 export default function RootLayout({
