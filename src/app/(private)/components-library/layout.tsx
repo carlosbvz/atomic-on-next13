@@ -1,7 +1,7 @@
-import Container from "@/atoms/containers/container";
-import Menu from "@/atoms/menu/menu";
-import MenuLink from "@/atoms/menu/menuLink";
-import styles from "./components-library.module.css";
+import Container from '@/atoms/containers/container';
+import Menu from '@/atoms/menu/menu';
+import MenuLink from '@/atoms/menu/menuLink';
+import styles from "../../app/(private)/components-library/components-library.module.css";
 
 const componentsLinks = [
   { href: "/components-library/links", label: "Links" },

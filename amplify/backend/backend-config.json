@@ -14,12 +14,7 @@
         "authConfig": {
           "additionalAuthenticationProviders": [
             {
-              "apiKeyConfig": {
-                "apiKeyExpirationDate": "2024-02-27T01:25:49.120Z",
-                "apiKeyExpirationDays": 365,
-                "description": "sandboxapikey"
-              },
-              "authenticationType": "API_KEY"
+              "authenticationType": "AWS_IAM"
             }
           ],
           "defaultAuthentication": {
@@ -80,14 +75,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_atomictechd4657d20PreSignup_DOMAINALLOWLIST": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "atomictechd4657d20PreSignup"
-        }
-      ]
-    },
     "AMPLIFY_function_atomictechd4657d20PreSignup_deploymentBucketName": {
       "usedBy": [
         {

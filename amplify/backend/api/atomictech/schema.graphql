@@ -1,15 +1,10 @@
-# This "input" configures a global authorization rule to enable public access to
-# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY {
-  globalAuthRule: AuthRule = { allow: public }
-} # FOR TESTING ONLY!
-type Project @model {
+type Project @model @auth(rules: [{allow: private}]) {
   id: ID!
   name: String!
   technologies: [Technology] @manyToMany(relationName: "ProjectTechnologies")
 }
 
-type Technology @model {
+type Technology @model @auth(rules: [{allow: private}]) {
   id: ID!
   name: String!
   projects: [Project] @manyToMany(relationName: "ProjectTechnologies")
@@ -21,16 +16,17 @@ enum ExperienceLevel {
   experienced
 }
 
-type TechnologyExperienceLevel @model {
+type TechnologyExperienceLevel @model @auth(rules: [{allow: private}]) {
   id: ID!
   level: ExperienceLevel!
   technology: Technology @belongsTo
   user: User @belongsTo
 }
 
-type User @model {
+type User @model @auth(rules: [{allow: private}]) {
   id: ID!
   name: String!
   email: String!
   experienceLevels: [TechnologyExperienceLevel] @hasMany
 }
+ 

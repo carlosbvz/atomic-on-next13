@@ -1,7 +1,7 @@
 // Root Layout: https://beta.nextjs.org/docs/routing/pages-and-layouts#root-layout-required
-import { Lato } from "@next/font/google";
-import "normalize.css/normalize.css";
-import "../themes/global.css";
+import '@/themes/global.css';
+import { Lato } from '@next/font/google';
+import 'normalize.css/normalize.css';
 
 export const metadata = {
   title: "Atomic Design on Nextjs 13",
