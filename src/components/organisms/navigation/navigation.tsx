@@ -9,8 +9,9 @@ import styles from "./navigation.module.css";
 const latoBold = Lato({ weight: "700", subsets: ["latin"] });
 const linksData = [
   { href: "/", label: "Home" },
-  { href: "/education", label: "Education" },
-  { href: "/nutrition", label: "Nutrition" },
+  { href: "/projects", label: "Projects" },
+  { href: "/technologies", label: "Technologies" },
+  { href: "/people", label: "People" },
 ];
 type NavigationType = {};
 
