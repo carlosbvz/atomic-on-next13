@@ -7,13 +7,14 @@ const ExperienceLevel = {
   "EXPERIENCED": "experienced"
 };
 
-const { Project, Technology, TechnologyExperienceLevel, User, ProjectTechnologies } = initSchema(schema);
+const { Project, Skill, SkillExperienceLevel, User, ProjectTechnologies, ProjectUsers } = initSchema(schema);
 
 export {
   Project,
-  Technology,
-  TechnologyExperienceLevel,
+  Skill,
+  SkillExperienceLevel,
   User,
   ProjectTechnologies,
+  ProjectUsers,
   ExperienceLevel
 };

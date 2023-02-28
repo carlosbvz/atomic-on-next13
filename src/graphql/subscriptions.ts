@@ -7,11 +7,25 @@ export const onCreateProject = /* GraphQL */ `
     onCreateProject(filter: $filter) {
       id
       name
-      technologies {
+      skills {
         items {
           id
           projectId
-          technologyId
+          skillId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      users {
+        items {
+          id
+          projectId
+          userId
           createdAt
           updatedAt
           _version
@@ -34,11 +48,25 @@ export const onUpdateProject = /* GraphQL */ `
     onUpdateProject(filter: $filter) {
       id
       name
-      technologies {
+      skills {
         items {
           id
           projectId
-          technologyId
+          skillId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      users {
+        items {
+          id
+          projectId
+          userId
           createdAt
           updatedAt
           _version
@@ -61,11 +89,25 @@ export const onDeleteProject = /* GraphQL */ `
     onDeleteProject(filter: $filter) {
       id
       name
-      technologies {
+      skills {
         items {
           id
           projectId
-          technologyId
+          skillId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      users {
+        items {
+          id
+          projectId
+          userId
           createdAt
           updatedAt
           _version
@@ -83,18 +125,16 @@ export const onDeleteProject = /* GraphQL */ `
     }
   }
 `;
-export const onCreateTechnology = /* GraphQL */ `
-  subscription OnCreateTechnology(
-    $filter: ModelSubscriptionTechnologyFilterInput
-  ) {
-    onCreateTechnology(filter: $filter) {
+export const onCreateSkill = /* GraphQL */ `
+  subscription OnCreateSkill($filter: ModelSubscriptionSkillFilterInput) {
+    onCreateSkill(filter: $filter) {
       id
       name
       projects {
         items {
           id
           projectId
-          technologyId
+          skillId
           createdAt
           updatedAt
           _version
@@ -113,7 +153,7 @@ export const onCreateTechnology = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
         }
         nextToken
@@ -127,18 +167,16 @@ export const onCreateTechnology = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateTechnology = /* GraphQL */ `
-  subscription OnUpdateTechnology(
-    $filter: ModelSubscriptionTechnologyFilterInput
-  ) {
-    onUpdateTechnology(filter: $filter) {
+export const onUpdateSkill = /* GraphQL */ `
+  subscription OnUpdateSkill($filter: ModelSubscriptionSkillFilterInput) {
+    onUpdateSkill(filter: $filter) {
       id
       name
       projects {
         items {
           id
           projectId
-          technologyId
+          skillId
           createdAt
           updatedAt
           _version
@@ -157,7 +195,7 @@ export const onUpdateTechnology = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
         }
         nextToken
@@ -171,18 +209,16 @@ export const onUpdateTechnology = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteTechnology = /* GraphQL */ `
-  subscription OnDeleteTechnology(
-    $filter: ModelSubscriptionTechnologyFilterInput
-  ) {
-    onDeleteTechnology(filter: $filter) {
+export const onDeleteSkill = /* GraphQL */ `
+  subscription OnDeleteSkill($filter: ModelSubscriptionSkillFilterInput) {
+    onDeleteSkill(filter: $filter) {
       id
       name
       projects {
         items {
           id
           projectId
-          technologyId
+          skillId
           createdAt
           updatedAt
           _version
@@ -201,7 +237,7 @@ export const onDeleteTechnology = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
         }
         nextToken
@@ -215,14 +251,14 @@ export const onDeleteTechnology = /* GraphQL */ `
     }
   }
 `;
-export const onCreateTechnologyExperienceLevel = /* GraphQL */ `
-  subscription OnCreateTechnologyExperienceLevel(
-    $filter: ModelSubscriptionTechnologyExperienceLevelFilterInput
+export const onCreateSkillExperienceLevel = /* GraphQL */ `
+  subscription OnCreateSkillExperienceLevel(
+    $filter: ModelSubscriptionSkillExperienceLevelFilterInput
   ) {
-    onCreateTechnologyExperienceLevel(filter: $filter) {
+    onCreateSkillExperienceLevel(filter: $filter) {
       id
       level
-      technology {
+      skill {
         id
         name
         projects {
@@ -247,6 +283,10 @@ export const onCreateTechnologyExperienceLevel = /* GraphQL */ `
           nextToken
           startedAt
         }
+        projects {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -258,19 +298,19 @@ export const onCreateTechnologyExperienceLevel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      technologyExperienceLevelsId
+      skillExperienceLevelsId
       userExperienceLevelsId
     }
   }
 `;
-export const onUpdateTechnologyExperienceLevel = /* GraphQL */ `
-  subscription OnUpdateTechnologyExperienceLevel(
-    $filter: ModelSubscriptionTechnologyExperienceLevelFilterInput
+export const onUpdateSkillExperienceLevel = /* GraphQL */ `
+  subscription OnUpdateSkillExperienceLevel(
+    $filter: ModelSubscriptionSkillExperienceLevelFilterInput
   ) {
-    onUpdateTechnologyExperienceLevel(filter: $filter) {
+    onUpdateSkillExperienceLevel(filter: $filter) {
       id
       level
-      technology {
+      skill {
         id
         name
         projects {
@@ -295,6 +335,10 @@ export const onUpdateTechnologyExperienceLevel = /* GraphQL */ `
           nextToken
           startedAt
         }
+        projects {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -306,19 +350,19 @@ export const onUpdateTechnologyExperienceLevel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      technologyExperienceLevelsId
+      skillExperienceLevelsId
       userExperienceLevelsId
     }
   }
 `;
-export const onDeleteTechnologyExperienceLevel = /* GraphQL */ `
-  subscription OnDeleteTechnologyExperienceLevel(
-    $filter: ModelSubscriptionTechnologyExperienceLevelFilterInput
+export const onDeleteSkillExperienceLevel = /* GraphQL */ `
+  subscription OnDeleteSkillExperienceLevel(
+    $filter: ModelSubscriptionSkillExperienceLevelFilterInput
   ) {
-    onDeleteTechnologyExperienceLevel(filter: $filter) {
+    onDeleteSkillExperienceLevel(filter: $filter) {
       id
       level
-      technology {
+      skill {
         id
         name
         projects {
@@ -343,6 +387,10 @@ export const onDeleteTechnologyExperienceLevel = /* GraphQL */ `
           nextToken
           startedAt
         }
+        projects {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -354,7 +402,7 @@ export const onDeleteTechnologyExperienceLevel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      technologyExperienceLevelsId
+      skillExperienceLevelsId
       userExperienceLevelsId
     }
   }
@@ -374,8 +422,22 @@ export const onCreateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
+        }
+        nextToken
+        startedAt
+      }
+      projects {
+        items {
+          id
+          projectId
+          userId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         nextToken
         startedAt
@@ -403,8 +465,22 @@ export const onUpdateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
+        }
+        nextToken
+        startedAt
+      }
+      projects {
+        items {
+          id
+          projectId
+          userId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         nextToken
         startedAt
@@ -432,8 +508,22 @@ export const onDeleteUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
+        }
+        nextToken
+        startedAt
+      }
+      projects {
+        items {
+          id
+          projectId
+          userId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         nextToken
         startedAt
@@ -453,11 +543,15 @@ export const onCreateProjectTechnologies = /* GraphQL */ `
     onCreateProjectTechnologies(filter: $filter) {
       id
       projectId
-      technologyId
+      skillId
       project {
         id
         name
-        technologies {
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
           nextToken
           startedAt
         }
@@ -467,7 +561,7 @@ export const onCreateProjectTechnologies = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      technology {
+      skill {
         id
         name
         projects {
@@ -499,11 +593,15 @@ export const onUpdateProjectTechnologies = /* GraphQL */ `
     onUpdateProjectTechnologies(filter: $filter) {
       id
       projectId
-      technologyId
+      skillId
       project {
         id
         name
-        technologies {
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
           nextToken
           startedAt
         }
@@ -513,7 +611,7 @@ export const onUpdateProjectTechnologies = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      technology {
+      skill {
         id
         name
         projects {
@@ -545,11 +643,15 @@ export const onDeleteProjectTechnologies = /* GraphQL */ `
     onDeleteProjectTechnologies(filter: $filter) {
       id
       projectId
-      technologyId
+      skillId
       project {
         id
         name
-        technologies {
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
           nextToken
           startedAt
         }
@@ -559,7 +661,7 @@ export const onDeleteProjectTechnologies = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      technology {
+      skill {
         id
         name
         projects {
@@ -567,6 +669,159 @@ export const onDeleteProjectTechnologies = /* GraphQL */ `
           startedAt
         }
         experienceLevels {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateProjectUsers = /* GraphQL */ `
+  subscription OnCreateProjectUsers(
+    $filter: ModelSubscriptionProjectUsersFilterInput
+  ) {
+    onCreateProjectUsers(filter: $filter) {
+      id
+      projectId
+      userId
+      project {
+        id
+        name
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      user {
+        id
+        name
+        email
+        experienceLevels {
+          nextToken
+          startedAt
+        }
+        projects {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateProjectUsers = /* GraphQL */ `
+  subscription OnUpdateProjectUsers(
+    $filter: ModelSubscriptionProjectUsersFilterInput
+  ) {
+    onUpdateProjectUsers(filter: $filter) {
+      id
+      projectId
+      userId
+      project {
+        id
+        name
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      user {
+        id
+        name
+        email
+        experienceLevels {
+          nextToken
+          startedAt
+        }
+        projects {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteProjectUsers = /* GraphQL */ `
+  subscription OnDeleteProjectUsers(
+    $filter: ModelSubscriptionProjectUsersFilterInput
+  ) {
+    onDeleteProjectUsers(filter: $filter) {
+      id
+      projectId
+      userId
+      project {
+        id
+        name
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      user {
+        id
+        name
+        email
+        experienceLevels {
+          nextToken
+          startedAt
+        }
+        projects {
           nextToken
           startedAt
         }

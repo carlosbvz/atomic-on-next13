@@ -1,14 +1,15 @@
-type Project @model @auth(rules: [{allow: private}]) {
+type Project @model @auth(rules: [{ allow: private }]) {
   id: ID!
   name: String!
-  technologies: [Technology] @manyToMany(relationName: "ProjectTechnologies")
+  skills: [Skill] @manyToMany(relationName: "ProjectTechnologies")
+  users: [User] @manyToMany(relationName: "ProjectUsers")
 }
 
-type Technology @model @auth(rules: [{allow: private}]) {
+type Skill @model @auth(rules: [{ allow: private }]) {
   id: ID!
   name: String!
   projects: [Project] @manyToMany(relationName: "ProjectTechnologies")
-  experienceLevels: [TechnologyExperienceLevel] @hasMany
+  experienceLevels: [SkillExperienceLevel] @hasMany
 }
 
 enum ExperienceLevel {
@@ -16,17 +17,17 @@ enum ExperienceLevel {
   experienced
 }
 
-type TechnologyExperienceLevel @model @auth(rules: [{allow: private}]) {
+type SkillExperienceLevel @model @auth(rules: [{ allow: private }]) {
   id: ID!
   level: ExperienceLevel!
-  technology: Technology @belongsTo
+  skill: Skill @belongsTo
   user: User @belongsTo
 }
 
-type User @model @auth(rules: [{allow: private}]) {
+type User @model @auth(rules: [{ allow: private }]) {
   id: ID!
   name: String!
   email: String!
-  experienceLevels: [TechnologyExperienceLevel] @hasMany
+  experienceLevels: [SkillExperienceLevel] @hasMany
+  projects: [Project] @manyToMany(relationName: "ProjectUsers")
 }
- 

@@ -17,11 +17,27 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "technologies": {
-                    "name": "technologies",
+                "skills": {
+                    "name": "skills",
                     "isArray": true,
                     "type": {
                         "model": "ProjectTechnologies"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "project"
+                        ]
+                    }
+                },
+                "users": {
+                    "name": "users",
+                    "isArray": true,
+                    "type": {
+                        "model": "ProjectUsers"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -75,8 +91,8 @@ export const schema = {
                 }
             ]
         },
-        "Technology": {
-            "name": "Technology",
+        "Skill": {
+            "name": "Skill",
             "fields": {
                 "id": {
                     "name": "id",
@@ -104,7 +120,7 @@ export const schema = {
                     "association": {
                         "connectionType": "HAS_MANY",
                         "associatedWith": [
-                            "technology"
+                            "skill"
                         ]
                     }
                 },
@@ -112,7 +128,7 @@ export const schema = {
                     "name": "experienceLevels",
                     "isArray": true,
                     "type": {
-                        "model": "TechnologyExperienceLevel"
+                        "model": "SkillExperienceLevel"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -120,7 +136,7 @@ export const schema = {
                     "association": {
                         "connectionType": "HAS_MANY",
                         "associatedWith": [
-                            "technologyExperienceLevelsId"
+                            "skillExperienceLevelsId"
                         ]
                     }
                 },
@@ -142,7 +158,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Technologies",
+            "pluralName": "Skills",
             "attributes": [
                 {
                     "type": "model",
@@ -166,8 +182,8 @@ export const schema = {
                 }
             ]
         },
-        "TechnologyExperienceLevel": {
-            "name": "TechnologyExperienceLevel",
+        "SkillExperienceLevel": {
+            "name": "SkillExperienceLevel",
             "fields": {
                 "id": {
                     "name": "id",
@@ -185,18 +201,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "technology": {
-                    "name": "technology",
+                "skill": {
+                    "name": "skill",
                     "isArray": false,
                     "type": {
-                        "model": "Technology"
+                        "model": "Skill"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
                         "targetNames": [
-                            "technologyExperienceLevelsId"
+                            "skillExperienceLevelsId"
                         ]
                     }
                 },
@@ -231,8 +247,8 @@ export const schema = {
                     "attributes": [],
                     "isReadOnly": true
                 },
-                "technologyExperienceLevelsId": {
-                    "name": "technologyExperienceLevelsId",
+                "skillExperienceLevelsId": {
+                    "name": "skillExperienceLevelsId",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
@@ -247,7 +263,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "TechnologyExperienceLevels",
+            "pluralName": "SkillExperienceLevels",
             "attributes": [
                 {
                     "type": "model",
@@ -299,7 +315,7 @@ export const schema = {
                     "name": "experienceLevels",
                     "isArray": true,
                     "type": {
-                        "model": "TechnologyExperienceLevel"
+                        "model": "SkillExperienceLevel"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -308,6 +324,22 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": [
                             "userExperienceLevelsId"
+                        ]
+                    }
+                },
+                "projects": {
+                    "name": "projects",
+                    "isArray": true,
+                    "type": {
+                        "model": "ProjectUsers"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "user"
                         ]
                     }
                 },
@@ -370,8 +402,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "technologyId": {
-                    "name": "technologyId",
+                "skillId": {
+                    "name": "skillId",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
@@ -392,18 +424,18 @@ export const schema = {
                         ]
                     }
                 },
-                "technology": {
-                    "name": "technology",
+                "skill": {
+                    "name": "skill",
                     "isArray": false,
                     "type": {
-                        "model": "Technology"
+                        "model": "Skill"
                     },
                     "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
                         "targetNames": [
-                            "technologyId"
+                            "skillId"
                         ]
                     }
                 },
@@ -443,9 +475,107 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byTechnology",
+                        "name": "bySkill",
                         "fields": [
-                            "technologyId"
+                            "skillId"
+                        ]
+                    }
+                }
+            ]
+        },
+        "ProjectUsers": {
+            "name": "ProjectUsers",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "projectId": {
+                    "name": "projectId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userId": {
+                    "name": "userId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "project": {
+                    "name": "project",
+                    "isArray": false,
+                    "type": {
+                        "model": "Project"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "projectId"
+                        ]
+                    }
+                },
+                "user": {
+                    "name": "user",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "userId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "ProjectUsers",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byProject",
+                        "fields": [
+                            "projectId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userId"
                         ]
                     }
                 }
@@ -463,5 +593,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "acb1fcc0aff8d58ebd27239265e11002"
+    "version": "dfe1e2f772a2b1f8e8245ddaa02345e5"
 };

@@ -10,11 +10,25 @@ export const createProject = /* GraphQL */ `
     createProject(input: $input, condition: $condition) {
       id
       name
-      technologies {
+      skills {
         items {
           id
           projectId
-          technologyId
+          skillId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      users {
+        items {
+          id
+          projectId
+          userId
           createdAt
           updatedAt
           _version
@@ -40,11 +54,25 @@ export const updateProject = /* GraphQL */ `
     updateProject(input: $input, condition: $condition) {
       id
       name
-      technologies {
+      skills {
         items {
           id
           projectId
-          technologyId
+          skillId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      users {
+        items {
+          id
+          projectId
+          userId
           createdAt
           updatedAt
           _version
@@ -70,11 +98,25 @@ export const deleteProject = /* GraphQL */ `
     deleteProject(input: $input, condition: $condition) {
       id
       name
-      technologies {
+      skills {
         items {
           id
           projectId
-          technologyId
+          skillId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      users {
+        items {
+          id
+          projectId
+          userId
           createdAt
           updatedAt
           _version
@@ -92,19 +134,19 @@ export const deleteProject = /* GraphQL */ `
     }
   }
 `;
-export const createTechnology = /* GraphQL */ `
-  mutation CreateTechnology(
-    $input: CreateTechnologyInput!
-    $condition: ModelTechnologyConditionInput
+export const createSkill = /* GraphQL */ `
+  mutation CreateSkill(
+    $input: CreateSkillInput!
+    $condition: ModelSkillConditionInput
   ) {
-    createTechnology(input: $input, condition: $condition) {
+    createSkill(input: $input, condition: $condition) {
       id
       name
       projects {
         items {
           id
           projectId
-          technologyId
+          skillId
           createdAt
           updatedAt
           _version
@@ -123,7 +165,7 @@ export const createTechnology = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
         }
         nextToken
@@ -137,19 +179,19 @@ export const createTechnology = /* GraphQL */ `
     }
   }
 `;
-export const updateTechnology = /* GraphQL */ `
-  mutation UpdateTechnology(
-    $input: UpdateTechnologyInput!
-    $condition: ModelTechnologyConditionInput
+export const updateSkill = /* GraphQL */ `
+  mutation UpdateSkill(
+    $input: UpdateSkillInput!
+    $condition: ModelSkillConditionInput
   ) {
-    updateTechnology(input: $input, condition: $condition) {
+    updateSkill(input: $input, condition: $condition) {
       id
       name
       projects {
         items {
           id
           projectId
-          technologyId
+          skillId
           createdAt
           updatedAt
           _version
@@ -168,7 +210,7 @@ export const updateTechnology = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
         }
         nextToken
@@ -182,19 +224,19 @@ export const updateTechnology = /* GraphQL */ `
     }
   }
 `;
-export const deleteTechnology = /* GraphQL */ `
-  mutation DeleteTechnology(
-    $input: DeleteTechnologyInput!
-    $condition: ModelTechnologyConditionInput
+export const deleteSkill = /* GraphQL */ `
+  mutation DeleteSkill(
+    $input: DeleteSkillInput!
+    $condition: ModelSkillConditionInput
   ) {
-    deleteTechnology(input: $input, condition: $condition) {
+    deleteSkill(input: $input, condition: $condition) {
       id
       name
       projects {
         items {
           id
           projectId
-          technologyId
+          skillId
           createdAt
           updatedAt
           _version
@@ -213,7 +255,7 @@ export const deleteTechnology = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
         }
         nextToken
@@ -227,15 +269,15 @@ export const deleteTechnology = /* GraphQL */ `
     }
   }
 `;
-export const createTechnologyExperienceLevel = /* GraphQL */ `
-  mutation CreateTechnologyExperienceLevel(
-    $input: CreateTechnologyExperienceLevelInput!
-    $condition: ModelTechnologyExperienceLevelConditionInput
+export const createSkillExperienceLevel = /* GraphQL */ `
+  mutation CreateSkillExperienceLevel(
+    $input: CreateSkillExperienceLevelInput!
+    $condition: ModelSkillExperienceLevelConditionInput
   ) {
-    createTechnologyExperienceLevel(input: $input, condition: $condition) {
+    createSkillExperienceLevel(input: $input, condition: $condition) {
       id
       level
-      technology {
+      skill {
         id
         name
         projects {
@@ -260,6 +302,10 @@ export const createTechnologyExperienceLevel = /* GraphQL */ `
           nextToken
           startedAt
         }
+        projects {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -271,20 +317,20 @@ export const createTechnologyExperienceLevel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      technologyExperienceLevelsId
+      skillExperienceLevelsId
       userExperienceLevelsId
     }
   }
 `;
-export const updateTechnologyExperienceLevel = /* GraphQL */ `
-  mutation UpdateTechnologyExperienceLevel(
-    $input: UpdateTechnologyExperienceLevelInput!
-    $condition: ModelTechnologyExperienceLevelConditionInput
+export const updateSkillExperienceLevel = /* GraphQL */ `
+  mutation UpdateSkillExperienceLevel(
+    $input: UpdateSkillExperienceLevelInput!
+    $condition: ModelSkillExperienceLevelConditionInput
   ) {
-    updateTechnologyExperienceLevel(input: $input, condition: $condition) {
+    updateSkillExperienceLevel(input: $input, condition: $condition) {
       id
       level
-      technology {
+      skill {
         id
         name
         projects {
@@ -309,6 +355,10 @@ export const updateTechnologyExperienceLevel = /* GraphQL */ `
           nextToken
           startedAt
         }
+        projects {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -320,20 +370,20 @@ export const updateTechnologyExperienceLevel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      technologyExperienceLevelsId
+      skillExperienceLevelsId
       userExperienceLevelsId
     }
   }
 `;
-export const deleteTechnologyExperienceLevel = /* GraphQL */ `
-  mutation DeleteTechnologyExperienceLevel(
-    $input: DeleteTechnologyExperienceLevelInput!
-    $condition: ModelTechnologyExperienceLevelConditionInput
+export const deleteSkillExperienceLevel = /* GraphQL */ `
+  mutation DeleteSkillExperienceLevel(
+    $input: DeleteSkillExperienceLevelInput!
+    $condition: ModelSkillExperienceLevelConditionInput
   ) {
-    deleteTechnologyExperienceLevel(input: $input, condition: $condition) {
+    deleteSkillExperienceLevel(input: $input, condition: $condition) {
       id
       level
-      technology {
+      skill {
         id
         name
         projects {
@@ -358,6 +408,10 @@ export const deleteTechnologyExperienceLevel = /* GraphQL */ `
           nextToken
           startedAt
         }
+        projects {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -369,7 +423,7 @@ export const deleteTechnologyExperienceLevel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      technologyExperienceLevelsId
+      skillExperienceLevelsId
       userExperienceLevelsId
     }
   }
@@ -392,8 +446,22 @@ export const createUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
+        }
+        nextToken
+        startedAt
+      }
+      projects {
+        items {
+          id
+          projectId
+          userId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         nextToken
         startedAt
@@ -424,8 +492,22 @@ export const updateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
+        }
+        nextToken
+        startedAt
+      }
+      projects {
+        items {
+          id
+          projectId
+          userId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         nextToken
         startedAt
@@ -456,8 +538,22 @@ export const deleteUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
+        }
+        nextToken
+        startedAt
+      }
+      projects {
+        items {
+          id
+          projectId
+          userId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         nextToken
         startedAt
@@ -478,11 +574,15 @@ export const createProjectTechnologies = /* GraphQL */ `
     createProjectTechnologies(input: $input, condition: $condition) {
       id
       projectId
-      technologyId
+      skillId
       project {
         id
         name
-        technologies {
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
           nextToken
           startedAt
         }
@@ -492,7 +592,7 @@ export const createProjectTechnologies = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      technology {
+      skill {
         id
         name
         projects {
@@ -525,11 +625,15 @@ export const updateProjectTechnologies = /* GraphQL */ `
     updateProjectTechnologies(input: $input, condition: $condition) {
       id
       projectId
-      technologyId
+      skillId
       project {
         id
         name
-        technologies {
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
           nextToken
           startedAt
         }
@@ -539,7 +643,7 @@ export const updateProjectTechnologies = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      technology {
+      skill {
         id
         name
         projects {
@@ -572,11 +676,15 @@ export const deleteProjectTechnologies = /* GraphQL */ `
     deleteProjectTechnologies(input: $input, condition: $condition) {
       id
       projectId
-      technologyId
+      skillId
       project {
         id
         name
-        technologies {
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
           nextToken
           startedAt
         }
@@ -586,7 +694,7 @@ export const deleteProjectTechnologies = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      technology {
+      skill {
         id
         name
         projects {
@@ -594,6 +702,162 @@ export const deleteProjectTechnologies = /* GraphQL */ `
           startedAt
         }
         experienceLevels {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createProjectUsers = /* GraphQL */ `
+  mutation CreateProjectUsers(
+    $input: CreateProjectUsersInput!
+    $condition: ModelProjectUsersConditionInput
+  ) {
+    createProjectUsers(input: $input, condition: $condition) {
+      id
+      projectId
+      userId
+      project {
+        id
+        name
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      user {
+        id
+        name
+        email
+        experienceLevels {
+          nextToken
+          startedAt
+        }
+        projects {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateProjectUsers = /* GraphQL */ `
+  mutation UpdateProjectUsers(
+    $input: UpdateProjectUsersInput!
+    $condition: ModelProjectUsersConditionInput
+  ) {
+    updateProjectUsers(input: $input, condition: $condition) {
+      id
+      projectId
+      userId
+      project {
+        id
+        name
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      user {
+        id
+        name
+        email
+        experienceLevels {
+          nextToken
+          startedAt
+        }
+        projects {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteProjectUsers = /* GraphQL */ `
+  mutation DeleteProjectUsers(
+    $input: DeleteProjectUsersInput!
+    $condition: ModelProjectUsersConditionInput
+  ) {
+    deleteProjectUsers(input: $input, condition: $condition) {
+      id
+      projectId
+      userId
+      project {
+        id
+        name
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      user {
+        id
+        name
+        email
+        experienceLevels {
+          nextToken
+          startedAt
+        }
+        projects {
           nextToken
           startedAt
         }

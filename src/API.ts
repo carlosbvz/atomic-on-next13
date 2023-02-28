@@ -59,7 +59,8 @@ export type Project = {
   __typename: "Project",
   id: string,
   name: string,
-  technologies?: ModelProjectTechnologiesConnection | null,
+  skills?: ModelProjectTechnologiesConnection | null,
+  users?: ModelProjectUsersConnection | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -78,9 +79,9 @@ export type ProjectTechnologies = {
   __typename: "ProjectTechnologies",
   id: string,
   projectId: string,
-  technologyId: string,
+  skillId: string,
   project: Project,
-  technology: Technology,
+  skill: Skill,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -88,12 +89,12 @@ export type ProjectTechnologies = {
   _lastChangedAt: number,
 };
 
-export type Technology = {
-  __typename: "Technology",
+export type Skill = {
+  __typename: "Skill",
   id: string,
   name: string,
   projects?: ModelProjectTechnologiesConnection | null,
-  experienceLevels?: ModelTechnologyExperienceLevelConnection | null,
+  experienceLevels?: ModelSkillExperienceLevelConnection | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -101,25 +102,25 @@ export type Technology = {
   _lastChangedAt: number,
 };
 
-export type ModelTechnologyExperienceLevelConnection = {
-  __typename: "ModelTechnologyExperienceLevelConnection",
-  items:  Array<TechnologyExperienceLevel | null >,
+export type ModelSkillExperienceLevelConnection = {
+  __typename: "ModelSkillExperienceLevelConnection",
+  items:  Array<SkillExperienceLevel | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
 
-export type TechnologyExperienceLevel = {
-  __typename: "TechnologyExperienceLevel",
+export type SkillExperienceLevel = {
+  __typename: "SkillExperienceLevel",
   id: string,
   level: ExperienceLevel,
-  technology?: Technology | null,
+  skill?: Skill | null,
   user?: User | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
-  technologyExperienceLevelsId?: string | null,
+  skillExperienceLevelsId?: string | null,
   userExperienceLevelsId?: string | null,
 };
 
@@ -134,7 +135,29 @@ export type User = {
   id: string,
   name: string,
   email: string,
-  experienceLevels?: ModelTechnologyExperienceLevelConnection | null,
+  experienceLevels?: ModelSkillExperienceLevelConnection | null,
+  projects?: ModelProjectUsersConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type ModelProjectUsersConnection = {
+  __typename: "ModelProjectUsersConnection",
+  items:  Array<ProjectUsers | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type ProjectUsers = {
+  __typename: "ProjectUsers",
+  id: string,
+  projectId: string,
+  userId: string,
+  project: Project,
+  user: User,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -153,44 +176,44 @@ export type DeleteProjectInput = {
   _version?: number | null,
 };
 
-export type CreateTechnologyInput = {
+export type CreateSkillInput = {
   id?: string | null,
   name: string,
   _version?: number | null,
 };
 
-export type ModelTechnologyConditionInput = {
+export type ModelSkillConditionInput = {
   name?: ModelStringInput | null,
-  and?: Array< ModelTechnologyConditionInput | null > | null,
-  or?: Array< ModelTechnologyConditionInput | null > | null,
-  not?: ModelTechnologyConditionInput | null,
+  and?: Array< ModelSkillConditionInput | null > | null,
+  or?: Array< ModelSkillConditionInput | null > | null,
+  not?: ModelSkillConditionInput | null,
 };
 
-export type UpdateTechnologyInput = {
+export type UpdateSkillInput = {
   id: string,
   name?: string | null,
   _version?: number | null,
 };
 
-export type DeleteTechnologyInput = {
+export type DeleteSkillInput = {
   id: string,
   _version?: number | null,
 };
 
-export type CreateTechnologyExperienceLevelInput = {
+export type CreateSkillExperienceLevelInput = {
   id?: string | null,
   level: ExperienceLevel,
   _version?: number | null,
-  technologyExperienceLevelsId?: string | null,
+  skillExperienceLevelsId?: string | null,
   userExperienceLevelsId?: string | null,
 };
 
-export type ModelTechnologyExperienceLevelConditionInput = {
+export type ModelSkillExperienceLevelConditionInput = {
   level?: ModelExperienceLevelInput | null,
-  and?: Array< ModelTechnologyExperienceLevelConditionInput | null > | null,
-  or?: Array< ModelTechnologyExperienceLevelConditionInput | null > | null,
-  not?: ModelTechnologyExperienceLevelConditionInput | null,
-  technologyExperienceLevelsId?: ModelIDInput | null,
+  and?: Array< ModelSkillExperienceLevelConditionInput | null > | null,
+  or?: Array< ModelSkillExperienceLevelConditionInput | null > | null,
+  not?: ModelSkillExperienceLevelConditionInput | null,
+  skillExperienceLevelsId?: ModelIDInput | null,
   userExperienceLevelsId?: ModelIDInput | null,
 };
 
@@ -215,15 +238,15 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type UpdateTechnologyExperienceLevelInput = {
+export type UpdateSkillExperienceLevelInput = {
   id: string,
   level?: ExperienceLevel | null,
   _version?: number | null,
-  technologyExperienceLevelsId?: string | null,
+  skillExperienceLevelsId?: string | null,
   userExperienceLevelsId?: string | null,
 };
 
-export type DeleteTechnologyExperienceLevelInput = {
+export type DeleteSkillExperienceLevelInput = {
   id: string,
   _version?: number | null,
 };
@@ -258,13 +281,13 @@ export type DeleteUserInput = {
 export type CreateProjectTechnologiesInput = {
   id?: string | null,
   projectId: string,
-  technologyId: string,
+  skillId: string,
   _version?: number | null,
 };
 
 export type ModelProjectTechnologiesConditionInput = {
   projectId?: ModelIDInput | null,
-  technologyId?: ModelIDInput | null,
+  skillId?: ModelIDInput | null,
   and?: Array< ModelProjectTechnologiesConditionInput | null > | null,
   or?: Array< ModelProjectTechnologiesConditionInput | null > | null,
   not?: ModelProjectTechnologiesConditionInput | null,
@@ -273,11 +296,38 @@ export type ModelProjectTechnologiesConditionInput = {
 export type UpdateProjectTechnologiesInput = {
   id: string,
   projectId?: string | null,
-  technologyId?: string | null,
+  skillId?: string | null,
   _version?: number | null,
 };
 
 export type DeleteProjectTechnologiesInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type CreateProjectUsersInput = {
+  id?: string | null,
+  projectId: string,
+  userId: string,
+  _version?: number | null,
+};
+
+export type ModelProjectUsersConditionInput = {
+  projectId?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
+  and?: Array< ModelProjectUsersConditionInput | null > | null,
+  or?: Array< ModelProjectUsersConditionInput | null > | null,
+  not?: ModelProjectUsersConditionInput | null,
+};
+
+export type UpdateProjectUsersInput = {
+  id: string,
+  projectId?: string | null,
+  userId?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteProjectUsersInput = {
   id: string,
   _version?: number | null,
 };
@@ -297,28 +347,28 @@ export type ModelProjectConnection = {
   startedAt?: number | null,
 };
 
-export type ModelTechnologyFilterInput = {
+export type ModelSkillFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  and?: Array< ModelTechnologyFilterInput | null > | null,
-  or?: Array< ModelTechnologyFilterInput | null > | null,
-  not?: ModelTechnologyFilterInput | null,
+  and?: Array< ModelSkillFilterInput | null > | null,
+  or?: Array< ModelSkillFilterInput | null > | null,
+  not?: ModelSkillFilterInput | null,
 };
 
-export type ModelTechnologyConnection = {
-  __typename: "ModelTechnologyConnection",
-  items:  Array<Technology | null >,
+export type ModelSkillConnection = {
+  __typename: "ModelSkillConnection",
+  items:  Array<Skill | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
 
-export type ModelTechnologyExperienceLevelFilterInput = {
+export type ModelSkillExperienceLevelFilterInput = {
   id?: ModelIDInput | null,
   level?: ModelExperienceLevelInput | null,
-  and?: Array< ModelTechnologyExperienceLevelFilterInput | null > | null,
-  or?: Array< ModelTechnologyExperienceLevelFilterInput | null > | null,
-  not?: ModelTechnologyExperienceLevelFilterInput | null,
-  technologyExperienceLevelsId?: ModelIDInput | null,
+  and?: Array< ModelSkillExperienceLevelFilterInput | null > | null,
+  or?: Array< ModelSkillExperienceLevelFilterInput | null > | null,
+  not?: ModelSkillExperienceLevelFilterInput | null,
+  skillExperienceLevelsId?: ModelIDInput | null,
   userExperienceLevelsId?: ModelIDInput | null,
 };
 
@@ -341,7 +391,7 @@ export type ModelUserConnection = {
 export type ModelProjectTechnologiesFilterInput = {
   id?: ModelIDInput | null,
   projectId?: ModelIDInput | null,
-  technologyId?: ModelIDInput | null,
+  skillId?: ModelIDInput | null,
   and?: Array< ModelProjectTechnologiesFilterInput | null > | null,
   or?: Array< ModelProjectTechnologiesFilterInput | null > | null,
   not?: ModelProjectTechnologiesFilterInput | null,
@@ -352,6 +402,15 @@ export enum ModelSortDirection {
   DESC = "DESC",
 }
 
+
+export type ModelProjectUsersFilterInput = {
+  id?: ModelIDInput | null,
+  projectId?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
+  and?: Array< ModelProjectUsersFilterInput | null > | null,
+  or?: Array< ModelProjectUsersFilterInput | null > | null,
+  not?: ModelProjectUsersFilterInput | null,
+};
 
 export type ModelSubscriptionProjectFilterInput = {
   id?: ModelSubscriptionIDInput | null,
@@ -390,18 +449,18 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type ModelSubscriptionTechnologyFilterInput = {
+export type ModelSubscriptionSkillFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTechnologyFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTechnologyFilterInput | null > | null,
+  and?: Array< ModelSubscriptionSkillFilterInput | null > | null,
+  or?: Array< ModelSubscriptionSkillFilterInput | null > | null,
 };
 
-export type ModelSubscriptionTechnologyExperienceLevelFilterInput = {
+export type ModelSubscriptionSkillExperienceLevelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   level?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTechnologyExperienceLevelFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTechnologyExperienceLevelFilterInput | null > | null,
+  and?: Array< ModelSubscriptionSkillExperienceLevelFilterInput | null > | null,
+  or?: Array< ModelSubscriptionSkillExperienceLevelFilterInput | null > | null,
 };
 
 export type ModelSubscriptionUserFilterInput = {
@@ -415,9 +474,17 @@ export type ModelSubscriptionUserFilterInput = {
 export type ModelSubscriptionProjectTechnologiesFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   projectId?: ModelSubscriptionIDInput | null,
-  technologyId?: ModelSubscriptionIDInput | null,
+  skillId?: ModelSubscriptionIDInput | null,
   and?: Array< ModelSubscriptionProjectTechnologiesFilterInput | null > | null,
   or?: Array< ModelSubscriptionProjectTechnologiesFilterInput | null > | null,
+};
+
+export type ModelSubscriptionProjectUsersFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  projectId?: ModelSubscriptionIDInput | null,
+  userId?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionProjectUsersFilterInput | null > | null,
+  or?: Array< ModelSubscriptionProjectUsersFilterInput | null > | null,
 };
 
 export type CreateProjectMutationVariables = {
@@ -430,13 +497,29 @@ export type CreateProjectMutation = {
     __typename: "Project",
     id: string,
     name: string,
-    technologies?:  {
+    skills?:  {
       __typename: "ModelProjectTechnologiesConnection",
       items:  Array< {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    users?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -464,13 +547,29 @@ export type UpdateProjectMutation = {
     __typename: "Project",
     id: string,
     name: string,
-    technologies?:  {
+    skills?:  {
       __typename: "ModelProjectTechnologiesConnection",
       items:  Array< {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    users?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -498,13 +597,29 @@ export type DeleteProjectMutation = {
     __typename: "Project",
     id: string,
     name: string,
-    technologies?:  {
+    skills?:  {
       __typename: "ModelProjectTechnologiesConnection",
       items:  Array< {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    users?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -522,14 +637,14 @@ export type DeleteProjectMutation = {
   } | null,
 };
 
-export type CreateTechnologyMutationVariables = {
-  input: CreateTechnologyInput,
-  condition?: ModelTechnologyConditionInput | null,
+export type CreateSkillMutationVariables = {
+  input: CreateSkillInput,
+  condition?: ModelSkillConditionInput | null,
 };
 
-export type CreateTechnologyMutation = {
-  createTechnology?:  {
-    __typename: "Technology",
+export type CreateSkillMutation = {
+  createSkill?:  {
+    __typename: "Skill",
     id: string,
     name: string,
     projects?:  {
@@ -538,7 +653,7 @@ export type CreateTechnologyMutation = {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -549,9 +664,9 @@ export type CreateTechnologyMutation = {
       startedAt?: number | null,
     } | null,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -559,7 +674,7 @@ export type CreateTechnologyMutation = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -573,14 +688,14 @@ export type CreateTechnologyMutation = {
   } | null,
 };
 
-export type UpdateTechnologyMutationVariables = {
-  input: UpdateTechnologyInput,
-  condition?: ModelTechnologyConditionInput | null,
+export type UpdateSkillMutationVariables = {
+  input: UpdateSkillInput,
+  condition?: ModelSkillConditionInput | null,
 };
 
-export type UpdateTechnologyMutation = {
-  updateTechnology?:  {
-    __typename: "Technology",
+export type UpdateSkillMutation = {
+  updateSkill?:  {
+    __typename: "Skill",
     id: string,
     name: string,
     projects?:  {
@@ -589,7 +704,7 @@ export type UpdateTechnologyMutation = {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -600,9 +715,9 @@ export type UpdateTechnologyMutation = {
       startedAt?: number | null,
     } | null,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -610,7 +725,7 @@ export type UpdateTechnologyMutation = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -624,14 +739,14 @@ export type UpdateTechnologyMutation = {
   } | null,
 };
 
-export type DeleteTechnologyMutationVariables = {
-  input: DeleteTechnologyInput,
-  condition?: ModelTechnologyConditionInput | null,
+export type DeleteSkillMutationVariables = {
+  input: DeleteSkillInput,
+  condition?: ModelSkillConditionInput | null,
 };
 
-export type DeleteTechnologyMutation = {
-  deleteTechnology?:  {
-    __typename: "Technology",
+export type DeleteSkillMutation = {
+  deleteSkill?:  {
+    __typename: "Skill",
     id: string,
     name: string,
     projects?:  {
@@ -640,7 +755,7 @@ export type DeleteTechnologyMutation = {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -651,9 +766,9 @@ export type DeleteTechnologyMutation = {
       startedAt?: number | null,
     } | null,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -661,7 +776,7 @@ export type DeleteTechnologyMutation = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -675,18 +790,18 @@ export type DeleteTechnologyMutation = {
   } | null,
 };
 
-export type CreateTechnologyExperienceLevelMutationVariables = {
-  input: CreateTechnologyExperienceLevelInput,
-  condition?: ModelTechnologyExperienceLevelConditionInput | null,
+export type CreateSkillExperienceLevelMutationVariables = {
+  input: CreateSkillExperienceLevelInput,
+  condition?: ModelSkillExperienceLevelConditionInput | null,
 };
 
-export type CreateTechnologyExperienceLevelMutation = {
-  createTechnologyExperienceLevel?:  {
-    __typename: "TechnologyExperienceLevel",
+export type CreateSkillExperienceLevelMutation = {
+  createSkillExperienceLevel?:  {
+    __typename: "SkillExperienceLevel",
     id: string,
     level: ExperienceLevel,
-    technology?:  {
-      __typename: "Technology",
+    skill?:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -695,7 +810,7 @@ export type CreateTechnologyExperienceLevelMutation = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -711,7 +826,12 @@ export type CreateTechnologyExperienceLevelMutation = {
       name: string,
       email: string,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -726,23 +846,23 @@ export type CreateTechnologyExperienceLevelMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    technologyExperienceLevelsId?: string | null,
+    skillExperienceLevelsId?: string | null,
     userExperienceLevelsId?: string | null,
   } | null,
 };
 
-export type UpdateTechnologyExperienceLevelMutationVariables = {
-  input: UpdateTechnologyExperienceLevelInput,
-  condition?: ModelTechnologyExperienceLevelConditionInput | null,
+export type UpdateSkillExperienceLevelMutationVariables = {
+  input: UpdateSkillExperienceLevelInput,
+  condition?: ModelSkillExperienceLevelConditionInput | null,
 };
 
-export type UpdateTechnologyExperienceLevelMutation = {
-  updateTechnologyExperienceLevel?:  {
-    __typename: "TechnologyExperienceLevel",
+export type UpdateSkillExperienceLevelMutation = {
+  updateSkillExperienceLevel?:  {
+    __typename: "SkillExperienceLevel",
     id: string,
     level: ExperienceLevel,
-    technology?:  {
-      __typename: "Technology",
+    skill?:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -751,7 +871,7 @@ export type UpdateTechnologyExperienceLevelMutation = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -767,7 +887,12 @@ export type UpdateTechnologyExperienceLevelMutation = {
       name: string,
       email: string,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -782,23 +907,23 @@ export type UpdateTechnologyExperienceLevelMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    technologyExperienceLevelsId?: string | null,
+    skillExperienceLevelsId?: string | null,
     userExperienceLevelsId?: string | null,
   } | null,
 };
 
-export type DeleteTechnologyExperienceLevelMutationVariables = {
-  input: DeleteTechnologyExperienceLevelInput,
-  condition?: ModelTechnologyExperienceLevelConditionInput | null,
+export type DeleteSkillExperienceLevelMutationVariables = {
+  input: DeleteSkillExperienceLevelInput,
+  condition?: ModelSkillExperienceLevelConditionInput | null,
 };
 
-export type DeleteTechnologyExperienceLevelMutation = {
-  deleteTechnologyExperienceLevel?:  {
-    __typename: "TechnologyExperienceLevel",
+export type DeleteSkillExperienceLevelMutation = {
+  deleteSkillExperienceLevel?:  {
+    __typename: "SkillExperienceLevel",
     id: string,
     level: ExperienceLevel,
-    technology?:  {
-      __typename: "Technology",
+    skill?:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -807,7 +932,7 @@ export type DeleteTechnologyExperienceLevelMutation = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -823,7 +948,12 @@ export type DeleteTechnologyExperienceLevelMutation = {
       name: string,
       email: string,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -838,7 +968,7 @@ export type DeleteTechnologyExperienceLevelMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    technologyExperienceLevelsId?: string | null,
+    skillExperienceLevelsId?: string | null,
     userExperienceLevelsId?: string | null,
   } | null,
 };
@@ -855,9 +985,9 @@ export type CreateUserMutation = {
     name: string,
     email: string,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -865,8 +995,24 @@ export type CreateUserMutation = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    projects?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -891,9 +1037,9 @@ export type UpdateUserMutation = {
     name: string,
     email: string,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -901,8 +1047,24 @@ export type UpdateUserMutation = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    projects?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -927,9 +1089,9 @@ export type DeleteUserMutation = {
     name: string,
     email: string,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -937,8 +1099,24 @@ export type DeleteUserMutation = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    projects?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -961,13 +1139,18 @@ export type CreateProjectTechnologiesMutation = {
     __typename: "ProjectTechnologies",
     id: string,
     projectId: string,
-    technologyId: string,
+    skillId: string,
     project:  {
       __typename: "Project",
       id: string,
       name: string,
-      technologies?:  {
+      skills?:  {
         __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -977,8 +1160,8 @@ export type CreateProjectTechnologiesMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
-    technology:  {
-      __typename: "Technology",
+    skill:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -987,7 +1170,7 @@ export type CreateProjectTechnologiesMutation = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1015,13 +1198,18 @@ export type UpdateProjectTechnologiesMutation = {
     __typename: "ProjectTechnologies",
     id: string,
     projectId: string,
-    technologyId: string,
+    skillId: string,
     project:  {
       __typename: "Project",
       id: string,
       name: string,
-      technologies?:  {
+      skills?:  {
         __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1031,8 +1219,8 @@ export type UpdateProjectTechnologiesMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
-    technology:  {
-      __typename: "Technology",
+    skill:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -1041,7 +1229,7 @@ export type UpdateProjectTechnologiesMutation = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1069,13 +1257,18 @@ export type DeleteProjectTechnologiesMutation = {
     __typename: "ProjectTechnologies",
     id: string,
     projectId: string,
-    technologyId: string,
+    skillId: string,
     project:  {
       __typename: "Project",
       id: string,
       name: string,
-      technologies?:  {
+      skills?:  {
         __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1085,8 +1278,8 @@ export type DeleteProjectTechnologiesMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
-    technology:  {
-      __typename: "Technology",
+    skill:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -1095,7 +1288,187 @@ export type DeleteProjectTechnologiesMutation = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type CreateProjectUsersMutationVariables = {
+  input: CreateProjectUsersInput,
+  condition?: ModelProjectUsersConditionInput | null,
+};
+
+export type CreateProjectUsersMutation = {
+  createProjectUsers?:  {
+    __typename: "ProjectUsers",
+    id: string,
+    projectId: string,
+    userId: string,
+    project:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      skills?:  {
+        __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    user:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email: string,
+      experienceLevels?:  {
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateProjectUsersMutationVariables = {
+  input: UpdateProjectUsersInput,
+  condition?: ModelProjectUsersConditionInput | null,
+};
+
+export type UpdateProjectUsersMutation = {
+  updateProjectUsers?:  {
+    __typename: "ProjectUsers",
+    id: string,
+    projectId: string,
+    userId: string,
+    project:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      skills?:  {
+        __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    user:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email: string,
+      experienceLevels?:  {
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteProjectUsersMutationVariables = {
+  input: DeleteProjectUsersInput,
+  condition?: ModelProjectUsersConditionInput | null,
+};
+
+export type DeleteProjectUsersMutation = {
+  deleteProjectUsers?:  {
+    __typename: "ProjectUsers",
+    id: string,
+    projectId: string,
+    userId: string,
+    project:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      skills?:  {
+        __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    user:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email: string,
+      experienceLevels?:  {
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1122,13 +1495,29 @@ export type GetProjectQuery = {
     __typename: "Project",
     id: string,
     name: string,
-    technologies?:  {
+    skills?:  {
       __typename: "ModelProjectTechnologiesConnection",
       items:  Array< {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    users?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1159,8 +1548,13 @@ export type ListProjectsQuery = {
       __typename: "Project",
       id: string,
       name: string,
-      technologies?:  {
+      skills?:  {
         __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1189,8 +1583,13 @@ export type SyncProjectsQuery = {
       __typename: "Project",
       id: string,
       name: string,
-      technologies?:  {
+      skills?:  {
         __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1205,13 +1604,13 @@ export type SyncProjectsQuery = {
   } | null,
 };
 
-export type GetTechnologyQueryVariables = {
+export type GetSkillQueryVariables = {
   id: string,
 };
 
-export type GetTechnologyQuery = {
-  getTechnology?:  {
-    __typename: "Technology",
+export type GetSkillQuery = {
+  getSkill?:  {
+    __typename: "Skill",
     id: string,
     name: string,
     projects?:  {
@@ -1220,7 +1619,7 @@ export type GetTechnologyQuery = {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1231,9 +1630,9 @@ export type GetTechnologyQuery = {
       startedAt?: number | null,
     } | null,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -1241,7 +1640,7 @@ export type GetTechnologyQuery = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -1255,17 +1654,17 @@ export type GetTechnologyQuery = {
   } | null,
 };
 
-export type ListTechnologiesQueryVariables = {
-  filter?: ModelTechnologyFilterInput | null,
+export type ListSkillsQueryVariables = {
+  filter?: ModelSkillFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTechnologiesQuery = {
-  listTechnologies?:  {
-    __typename: "ModelTechnologyConnection",
+export type ListSkillsQuery = {
+  listSkills?:  {
+    __typename: "ModelSkillConnection",
     items:  Array< {
-      __typename: "Technology",
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -1274,7 +1673,7 @@ export type ListTechnologiesQuery = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1289,18 +1688,18 @@ export type ListTechnologiesQuery = {
   } | null,
 };
 
-export type SyncTechnologiesQueryVariables = {
-  filter?: ModelTechnologyFilterInput | null,
+export type SyncSkillsQueryVariables = {
+  filter?: ModelSkillFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncTechnologiesQuery = {
-  syncTechnologies?:  {
-    __typename: "ModelTechnologyConnection",
+export type SyncSkillsQuery = {
+  syncSkills?:  {
+    __typename: "ModelSkillConnection",
     items:  Array< {
-      __typename: "Technology",
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -1309,7 +1708,7 @@ export type SyncTechnologiesQuery = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1324,17 +1723,17 @@ export type SyncTechnologiesQuery = {
   } | null,
 };
 
-export type GetTechnologyExperienceLevelQueryVariables = {
+export type GetSkillExperienceLevelQueryVariables = {
   id: string,
 };
 
-export type GetTechnologyExperienceLevelQuery = {
-  getTechnologyExperienceLevel?:  {
-    __typename: "TechnologyExperienceLevel",
+export type GetSkillExperienceLevelQuery = {
+  getSkillExperienceLevel?:  {
+    __typename: "SkillExperienceLevel",
     id: string,
     level: ExperienceLevel,
-    technology?:  {
-      __typename: "Technology",
+    skill?:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -1343,7 +1742,7 @@ export type GetTechnologyExperienceLevelQuery = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1359,7 +1758,12 @@ export type GetTechnologyExperienceLevelQuery = {
       name: string,
       email: string,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1374,26 +1778,26 @@ export type GetTechnologyExperienceLevelQuery = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    technologyExperienceLevelsId?: string | null,
+    skillExperienceLevelsId?: string | null,
     userExperienceLevelsId?: string | null,
   } | null,
 };
 
-export type ListTechnologyExperienceLevelsQueryVariables = {
-  filter?: ModelTechnologyExperienceLevelFilterInput | null,
+export type ListSkillExperienceLevelsQueryVariables = {
+  filter?: ModelSkillExperienceLevelFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTechnologyExperienceLevelsQuery = {
-  listTechnologyExperienceLevels?:  {
-    __typename: "ModelTechnologyExperienceLevelConnection",
+export type ListSkillExperienceLevelsQuery = {
+  listSkillExperienceLevels?:  {
+    __typename: "ModelSkillExperienceLevelConnection",
     items:  Array< {
-      __typename: "TechnologyExperienceLevel",
+      __typename: "SkillExperienceLevel",
       id: string,
       level: ExperienceLevel,
-      technology?:  {
-        __typename: "Technology",
+      skill?:  {
+        __typename: "Skill",
         id: string,
         name: string,
         createdAt: string,
@@ -1418,7 +1822,7 @@ export type ListTechnologyExperienceLevelsQuery = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
-      technologyExperienceLevelsId?: string | null,
+      skillExperienceLevelsId?: string | null,
       userExperienceLevelsId?: string | null,
     } | null >,
     nextToken?: string | null,
@@ -1426,22 +1830,22 @@ export type ListTechnologyExperienceLevelsQuery = {
   } | null,
 };
 
-export type SyncTechnologyExperienceLevelsQueryVariables = {
-  filter?: ModelTechnologyExperienceLevelFilterInput | null,
+export type SyncSkillExperienceLevelsQueryVariables = {
+  filter?: ModelSkillExperienceLevelFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncTechnologyExperienceLevelsQuery = {
-  syncTechnologyExperienceLevels?:  {
-    __typename: "ModelTechnologyExperienceLevelConnection",
+export type SyncSkillExperienceLevelsQuery = {
+  syncSkillExperienceLevels?:  {
+    __typename: "ModelSkillExperienceLevelConnection",
     items:  Array< {
-      __typename: "TechnologyExperienceLevel",
+      __typename: "SkillExperienceLevel",
       id: string,
       level: ExperienceLevel,
-      technology?:  {
-        __typename: "Technology",
+      skill?:  {
+        __typename: "Skill",
         id: string,
         name: string,
         createdAt: string,
@@ -1466,7 +1870,7 @@ export type SyncTechnologyExperienceLevelsQuery = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
-      technologyExperienceLevelsId?: string | null,
+      skillExperienceLevelsId?: string | null,
       userExperienceLevelsId?: string | null,
     } | null >,
     nextToken?: string | null,
@@ -1485,9 +1889,9 @@ export type GetUserQuery = {
     name: string,
     email: string,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -1495,8 +1899,24 @@ export type GetUserQuery = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    projects?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -1524,7 +1944,12 @@ export type ListUsersQuery = {
       name: string,
       email: string,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1555,7 +1980,12 @@ export type SyncUsersQuery = {
       name: string,
       email: string,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1579,13 +2009,18 @@ export type GetProjectTechnologiesQuery = {
     __typename: "ProjectTechnologies",
     id: string,
     projectId: string,
-    technologyId: string,
+    skillId: string,
     project:  {
       __typename: "Project",
       id: string,
       name: string,
-      technologies?:  {
+      skills?:  {
         __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1595,8 +2030,8 @@ export type GetProjectTechnologiesQuery = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
-    technology:  {
-      __typename: "Technology",
+    skill:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -1605,7 +2040,7 @@ export type GetProjectTechnologiesQuery = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1636,7 +2071,7 @@ export type ListProjectTechnologiesQuery = {
       __typename: "ProjectTechnologies",
       id: string,
       projectId: string,
-      technologyId: string,
+      skillId: string,
       project:  {
         __typename: "Project",
         id: string,
@@ -1647,8 +2082,8 @@ export type ListProjectTechnologiesQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
       },
-      technology:  {
-        __typename: "Technology",
+      skill:  {
+        __typename: "Skill",
         id: string,
         name: string,
         createdAt: string,
@@ -1682,7 +2117,7 @@ export type SyncProjectTechnologiesQuery = {
       __typename: "ProjectTechnologies",
       id: string,
       projectId: string,
-      technologyId: string,
+      skillId: string,
       project:  {
         __typename: "Project",
         id: string,
@@ -1693,8 +2128,8 @@ export type SyncProjectTechnologiesQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
       },
-      technology:  {
-        __typename: "Technology",
+      skill:  {
+        __typename: "Skill",
         id: string,
         name: string,
         createdAt: string,
@@ -1729,7 +2164,7 @@ export type ProjectTechnologiesByProjectIdQuery = {
       __typename: "ProjectTechnologies",
       id: string,
       projectId: string,
-      technologyId: string,
+      skillId: string,
       project:  {
         __typename: "Project",
         id: string,
@@ -1740,8 +2175,8 @@ export type ProjectTechnologiesByProjectIdQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
       },
-      technology:  {
-        __typename: "Technology",
+      skill:  {
+        __typename: "Skill",
         id: string,
         name: string,
         createdAt: string,
@@ -1761,22 +2196,22 @@ export type ProjectTechnologiesByProjectIdQuery = {
   } | null,
 };
 
-export type ProjectTechnologiesByTechnologyIdQueryVariables = {
-  technologyId: string,
+export type ProjectTechnologiesBySkillIdQueryVariables = {
+  skillId: string,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelProjectTechnologiesFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ProjectTechnologiesByTechnologyIdQuery = {
-  projectTechnologiesByTechnologyId?:  {
+export type ProjectTechnologiesBySkillIdQuery = {
+  projectTechnologiesBySkillId?:  {
     __typename: "ModelProjectTechnologiesConnection",
     items:  Array< {
       __typename: "ProjectTechnologies",
       id: string,
       projectId: string,
-      technologyId: string,
+      skillId: string,
       project:  {
         __typename: "Project",
         id: string,
@@ -1787,10 +2222,258 @@ export type ProjectTechnologiesByTechnologyIdQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
       },
-      technology:  {
-        __typename: "Technology",
+      skill:  {
+        __typename: "Skill",
         id: string,
         name: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      },
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type GetProjectUsersQueryVariables = {
+  id: string,
+};
+
+export type GetProjectUsersQuery = {
+  getProjectUsers?:  {
+    __typename: "ProjectUsers",
+    id: string,
+    projectId: string,
+    userId: string,
+    project:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      skills?:  {
+        __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    user:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email: string,
+      experienceLevels?:  {
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListProjectUsersQueryVariables = {
+  filter?: ModelProjectUsersFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListProjectUsersQuery = {
+  listProjectUsers?:  {
+    __typename: "ModelProjectUsersConnection",
+    items:  Array< {
+      __typename: "ProjectUsers",
+      id: string,
+      projectId: string,
+      userId: string,
+      project:  {
+        __typename: "Project",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      },
+      user:  {
+        __typename: "User",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      },
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncProjectUsersQueryVariables = {
+  filter?: ModelProjectUsersFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncProjectUsersQuery = {
+  syncProjectUsers?:  {
+    __typename: "ModelProjectUsersConnection",
+    items:  Array< {
+      __typename: "ProjectUsers",
+      id: string,
+      projectId: string,
+      userId: string,
+      project:  {
+        __typename: "Project",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      },
+      user:  {
+        __typename: "User",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      },
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type ProjectUsersByProjectIdQueryVariables = {
+  projectId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelProjectUsersFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ProjectUsersByProjectIdQuery = {
+  projectUsersByProjectId?:  {
+    __typename: "ModelProjectUsersConnection",
+    items:  Array< {
+      __typename: "ProjectUsers",
+      id: string,
+      projectId: string,
+      userId: string,
+      project:  {
+        __typename: "Project",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      },
+      user:  {
+        __typename: "User",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      },
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type ProjectUsersByUserIdQueryVariables = {
+  userId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelProjectUsersFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ProjectUsersByUserIdQuery = {
+  projectUsersByUserId?:  {
+    __typename: "ModelProjectUsersConnection",
+    items:  Array< {
+      __typename: "ProjectUsers",
+      id: string,
+      projectId: string,
+      userId: string,
+      project:  {
+        __typename: "Project",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      },
+      user:  {
+        __typename: "User",
+        id: string,
+        name: string,
+        email: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1817,13 +2500,29 @@ export type OnCreateProjectSubscription = {
     __typename: "Project",
     id: string,
     name: string,
-    technologies?:  {
+    skills?:  {
       __typename: "ModelProjectTechnologiesConnection",
       items:  Array< {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    users?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1850,13 +2549,29 @@ export type OnUpdateProjectSubscription = {
     __typename: "Project",
     id: string,
     name: string,
-    technologies?:  {
+    skills?:  {
       __typename: "ModelProjectTechnologiesConnection",
       items:  Array< {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    users?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1883,13 +2598,29 @@ export type OnDeleteProjectSubscription = {
     __typename: "Project",
     id: string,
     name: string,
-    technologies?:  {
+    skills?:  {
       __typename: "ModelProjectTechnologiesConnection",
       items:  Array< {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    users?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1907,13 +2638,13 @@ export type OnDeleteProjectSubscription = {
   } | null,
 };
 
-export type OnCreateTechnologySubscriptionVariables = {
-  filter?: ModelSubscriptionTechnologyFilterInput | null,
+export type OnCreateSkillSubscriptionVariables = {
+  filter?: ModelSubscriptionSkillFilterInput | null,
 };
 
-export type OnCreateTechnologySubscription = {
-  onCreateTechnology?:  {
-    __typename: "Technology",
+export type OnCreateSkillSubscription = {
+  onCreateSkill?:  {
+    __typename: "Skill",
     id: string,
     name: string,
     projects?:  {
@@ -1922,7 +2653,7 @@ export type OnCreateTechnologySubscription = {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1933,9 +2664,9 @@ export type OnCreateTechnologySubscription = {
       startedAt?: number | null,
     } | null,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -1943,7 +2674,7 @@ export type OnCreateTechnologySubscription = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -1957,13 +2688,13 @@ export type OnCreateTechnologySubscription = {
   } | null,
 };
 
-export type OnUpdateTechnologySubscriptionVariables = {
-  filter?: ModelSubscriptionTechnologyFilterInput | null,
+export type OnUpdateSkillSubscriptionVariables = {
+  filter?: ModelSubscriptionSkillFilterInput | null,
 };
 
-export type OnUpdateTechnologySubscription = {
-  onUpdateTechnology?:  {
-    __typename: "Technology",
+export type OnUpdateSkillSubscription = {
+  onUpdateSkill?:  {
+    __typename: "Skill",
     id: string,
     name: string,
     projects?:  {
@@ -1972,7 +2703,7 @@ export type OnUpdateTechnologySubscription = {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1983,9 +2714,9 @@ export type OnUpdateTechnologySubscription = {
       startedAt?: number | null,
     } | null,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -1993,7 +2724,7 @@ export type OnUpdateTechnologySubscription = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -2007,13 +2738,13 @@ export type OnUpdateTechnologySubscription = {
   } | null,
 };
 
-export type OnDeleteTechnologySubscriptionVariables = {
-  filter?: ModelSubscriptionTechnologyFilterInput | null,
+export type OnDeleteSkillSubscriptionVariables = {
+  filter?: ModelSubscriptionSkillFilterInput | null,
 };
 
-export type OnDeleteTechnologySubscription = {
-  onDeleteTechnology?:  {
-    __typename: "Technology",
+export type OnDeleteSkillSubscription = {
+  onDeleteSkill?:  {
+    __typename: "Skill",
     id: string,
     name: string,
     projects?:  {
@@ -2022,7 +2753,7 @@ export type OnDeleteTechnologySubscription = {
         __typename: "ProjectTechnologies",
         id: string,
         projectId: string,
-        technologyId: string,
+        skillId: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -2033,9 +2764,9 @@ export type OnDeleteTechnologySubscription = {
       startedAt?: number | null,
     } | null,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -2043,7 +2774,7 @@ export type OnDeleteTechnologySubscription = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
       } | null >,
       nextToken?: string | null,
@@ -2057,17 +2788,17 @@ export type OnDeleteTechnologySubscription = {
   } | null,
 };
 
-export type OnCreateTechnologyExperienceLevelSubscriptionVariables = {
-  filter?: ModelSubscriptionTechnologyExperienceLevelFilterInput | null,
+export type OnCreateSkillExperienceLevelSubscriptionVariables = {
+  filter?: ModelSubscriptionSkillExperienceLevelFilterInput | null,
 };
 
-export type OnCreateTechnologyExperienceLevelSubscription = {
-  onCreateTechnologyExperienceLevel?:  {
-    __typename: "TechnologyExperienceLevel",
+export type OnCreateSkillExperienceLevelSubscription = {
+  onCreateSkillExperienceLevel?:  {
+    __typename: "SkillExperienceLevel",
     id: string,
     level: ExperienceLevel,
-    technology?:  {
-      __typename: "Technology",
+    skill?:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -2076,7 +2807,7 @@ export type OnCreateTechnologyExperienceLevelSubscription = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2092,7 +2823,12 @@ export type OnCreateTechnologyExperienceLevelSubscription = {
       name: string,
       email: string,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2107,22 +2843,22 @@ export type OnCreateTechnologyExperienceLevelSubscription = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    technologyExperienceLevelsId?: string | null,
+    skillExperienceLevelsId?: string | null,
     userExperienceLevelsId?: string | null,
   } | null,
 };
 
-export type OnUpdateTechnologyExperienceLevelSubscriptionVariables = {
-  filter?: ModelSubscriptionTechnologyExperienceLevelFilterInput | null,
+export type OnUpdateSkillExperienceLevelSubscriptionVariables = {
+  filter?: ModelSubscriptionSkillExperienceLevelFilterInput | null,
 };
 
-export type OnUpdateTechnologyExperienceLevelSubscription = {
-  onUpdateTechnologyExperienceLevel?:  {
-    __typename: "TechnologyExperienceLevel",
+export type OnUpdateSkillExperienceLevelSubscription = {
+  onUpdateSkillExperienceLevel?:  {
+    __typename: "SkillExperienceLevel",
     id: string,
     level: ExperienceLevel,
-    technology?:  {
-      __typename: "Technology",
+    skill?:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -2131,7 +2867,7 @@ export type OnUpdateTechnologyExperienceLevelSubscription = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2147,7 +2883,12 @@ export type OnUpdateTechnologyExperienceLevelSubscription = {
       name: string,
       email: string,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2162,22 +2903,22 @@ export type OnUpdateTechnologyExperienceLevelSubscription = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    technologyExperienceLevelsId?: string | null,
+    skillExperienceLevelsId?: string | null,
     userExperienceLevelsId?: string | null,
   } | null,
 };
 
-export type OnDeleteTechnologyExperienceLevelSubscriptionVariables = {
-  filter?: ModelSubscriptionTechnologyExperienceLevelFilterInput | null,
+export type OnDeleteSkillExperienceLevelSubscriptionVariables = {
+  filter?: ModelSubscriptionSkillExperienceLevelFilterInput | null,
 };
 
-export type OnDeleteTechnologyExperienceLevelSubscription = {
-  onDeleteTechnologyExperienceLevel?:  {
-    __typename: "TechnologyExperienceLevel",
+export type OnDeleteSkillExperienceLevelSubscription = {
+  onDeleteSkillExperienceLevel?:  {
+    __typename: "SkillExperienceLevel",
     id: string,
     level: ExperienceLevel,
-    technology?:  {
-      __typename: "Technology",
+    skill?:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -2186,7 +2927,7 @@ export type OnDeleteTechnologyExperienceLevelSubscription = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2202,7 +2943,12 @@ export type OnDeleteTechnologyExperienceLevelSubscription = {
       name: string,
       email: string,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2217,7 +2963,7 @@ export type OnDeleteTechnologyExperienceLevelSubscription = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    technologyExperienceLevelsId?: string | null,
+    skillExperienceLevelsId?: string | null,
     userExperienceLevelsId?: string | null,
   } | null,
 };
@@ -2233,9 +2979,9 @@ export type OnCreateUserSubscription = {
     name: string,
     email: string,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -2243,8 +2989,24 @@ export type OnCreateUserSubscription = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    projects?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -2268,9 +3030,9 @@ export type OnUpdateUserSubscription = {
     name: string,
     email: string,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -2278,8 +3040,24 @@ export type OnUpdateUserSubscription = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    projects?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -2303,9 +3081,9 @@ export type OnDeleteUserSubscription = {
     name: string,
     email: string,
     experienceLevels?:  {
-      __typename: "ModelTechnologyExperienceLevelConnection",
+      __typename: "ModelSkillExperienceLevelConnection",
       items:  Array< {
-        __typename: "TechnologyExperienceLevel",
+        __typename: "SkillExperienceLevel",
         id: string,
         level: ExperienceLevel,
         createdAt: string,
@@ -2313,8 +3091,24 @@ export type OnDeleteUserSubscription = {
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
-        technologyExperienceLevelsId?: string | null,
+        skillExperienceLevelsId?: string | null,
         userExperienceLevelsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    projects?:  {
+      __typename: "ModelProjectUsersConnection",
+      items:  Array< {
+        __typename: "ProjectUsers",
+        id: string,
+        projectId: string,
+        userId: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
       } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
@@ -2336,13 +3130,18 @@ export type OnCreateProjectTechnologiesSubscription = {
     __typename: "ProjectTechnologies",
     id: string,
     projectId: string,
-    technologyId: string,
+    skillId: string,
     project:  {
       __typename: "Project",
       id: string,
       name: string,
-      technologies?:  {
+      skills?:  {
         __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2352,8 +3151,8 @@ export type OnCreateProjectTechnologiesSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
-    technology:  {
-      __typename: "Technology",
+    skill:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -2362,7 +3161,7 @@ export type OnCreateProjectTechnologiesSubscription = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2389,13 +3188,18 @@ export type OnUpdateProjectTechnologiesSubscription = {
     __typename: "ProjectTechnologies",
     id: string,
     projectId: string,
-    technologyId: string,
+    skillId: string,
     project:  {
       __typename: "Project",
       id: string,
       name: string,
-      technologies?:  {
+      skills?:  {
         __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2405,8 +3209,8 @@ export type OnUpdateProjectTechnologiesSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
-    technology:  {
-      __typename: "Technology",
+    skill:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -2415,7 +3219,7 @@ export type OnUpdateProjectTechnologiesSubscription = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2442,13 +3246,18 @@ export type OnDeleteProjectTechnologiesSubscription = {
     __typename: "ProjectTechnologies",
     id: string,
     projectId: string,
-    technologyId: string,
+    skillId: string,
     project:  {
       __typename: "Project",
       id: string,
       name: string,
-      technologies?:  {
+      skills?:  {
         __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2458,8 +3267,8 @@ export type OnDeleteProjectTechnologiesSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
-    technology:  {
-      __typename: "Technology",
+    skill:  {
+      __typename: "Skill",
       id: string,
       name: string,
       projects?:  {
@@ -2468,7 +3277,184 @@ export type OnDeleteProjectTechnologiesSubscription = {
         startedAt?: number | null,
       } | null,
       experienceLevels?:  {
-        __typename: "ModelTechnologyExperienceLevelConnection",
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnCreateProjectUsersSubscriptionVariables = {
+  filter?: ModelSubscriptionProjectUsersFilterInput | null,
+};
+
+export type OnCreateProjectUsersSubscription = {
+  onCreateProjectUsers?:  {
+    __typename: "ProjectUsers",
+    id: string,
+    projectId: string,
+    userId: string,
+    project:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      skills?:  {
+        __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    user:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email: string,
+      experienceLevels?:  {
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateProjectUsersSubscriptionVariables = {
+  filter?: ModelSubscriptionProjectUsersFilterInput | null,
+};
+
+export type OnUpdateProjectUsersSubscription = {
+  onUpdateProjectUsers?:  {
+    __typename: "ProjectUsers",
+    id: string,
+    projectId: string,
+    userId: string,
+    project:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      skills?:  {
+        __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    user:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email: string,
+      experienceLevels?:  {
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteProjectUsersSubscriptionVariables = {
+  filter?: ModelSubscriptionProjectUsersFilterInput | null,
+};
+
+export type OnDeleteProjectUsersSubscription = {
+  onDeleteProjectUsers?:  {
+    __typename: "ProjectUsers",
+    id: string,
+    projectId: string,
+    userId: string,
+    project:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      skills?:  {
+        __typename: "ModelProjectTechnologiesConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      users?:  {
+        __typename: "ModelProjectUsersConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    user:  {
+      __typename: "User",
+      id: string,
+      name: string,
+      email: string,
+      experienceLevels?:  {
+        __typename: "ModelSkillExperienceLevelConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      projects?:  {
+        __typename: "ModelProjectUsersConnection",
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,

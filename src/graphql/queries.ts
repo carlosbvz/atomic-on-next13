@@ -7,11 +7,25 @@ export const getProject = /* GraphQL */ `
     getProject(id: $id) {
       id
       name
-      technologies {
+      skills {
         items {
           id
           projectId
-          technologyId
+          skillId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      users {
+        items {
+          id
+          projectId
+          userId
           createdAt
           updatedAt
           _version
@@ -39,7 +53,11 @@ export const listProjects = /* GraphQL */ `
       items {
         id
         name
-        technologies {
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
           nextToken
           startedAt
         }
@@ -70,7 +88,11 @@ export const syncProjects = /* GraphQL */ `
       items {
         id
         name
-        technologies {
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
           nextToken
           startedAt
         }
@@ -85,16 +107,16 @@ export const syncProjects = /* GraphQL */ `
     }
   }
 `;
-export const getTechnology = /* GraphQL */ `
-  query GetTechnology($id: ID!) {
-    getTechnology(id: $id) {
+export const getSkill = /* GraphQL */ `
+  query GetSkill($id: ID!) {
+    getSkill(id: $id) {
       id
       name
       projects {
         items {
           id
           projectId
-          technologyId
+          skillId
           createdAt
           updatedAt
           _version
@@ -113,7 +135,7 @@ export const getTechnology = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
         }
         nextToken
@@ -127,13 +149,13 @@ export const getTechnology = /* GraphQL */ `
     }
   }
 `;
-export const listTechnologies = /* GraphQL */ `
-  query ListTechnologies(
-    $filter: ModelTechnologyFilterInput
+export const listSkills = /* GraphQL */ `
+  query ListSkills(
+    $filter: ModelSkillFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listTechnologies(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listSkills(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
@@ -156,14 +178,14 @@ export const listTechnologies = /* GraphQL */ `
     }
   }
 `;
-export const syncTechnologies = /* GraphQL */ `
-  query SyncTechnologies(
-    $filter: ModelTechnologyFilterInput
+export const syncSkills = /* GraphQL */ `
+  query SyncSkills(
+    $filter: ModelSkillFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncTechnologies(
+    syncSkills(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -191,12 +213,12 @@ export const syncTechnologies = /* GraphQL */ `
     }
   }
 `;
-export const getTechnologyExperienceLevel = /* GraphQL */ `
-  query GetTechnologyExperienceLevel($id: ID!) {
-    getTechnologyExperienceLevel(id: $id) {
+export const getSkillExperienceLevel = /* GraphQL */ `
+  query GetSkillExperienceLevel($id: ID!) {
+    getSkillExperienceLevel(id: $id) {
       id
       level
-      technology {
+      skill {
         id
         name
         projects {
@@ -221,6 +243,10 @@ export const getTechnologyExperienceLevel = /* GraphQL */ `
           nextToken
           startedAt
         }
+        projects {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -232,18 +258,18 @@ export const getTechnologyExperienceLevel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      technologyExperienceLevelsId
+      skillExperienceLevelsId
       userExperienceLevelsId
     }
   }
 `;
-export const listTechnologyExperienceLevels = /* GraphQL */ `
-  query ListTechnologyExperienceLevels(
-    $filter: ModelTechnologyExperienceLevelFilterInput
+export const listSkillExperienceLevels = /* GraphQL */ `
+  query ListSkillExperienceLevels(
+    $filter: ModelSkillExperienceLevelFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listTechnologyExperienceLevels(
+    listSkillExperienceLevels(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -251,7 +277,7 @@ export const listTechnologyExperienceLevels = /* GraphQL */ `
       items {
         id
         level
-        technology {
+        skill {
           id
           name
           createdAt
@@ -275,7 +301,7 @@ export const listTechnologyExperienceLevels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        technologyExperienceLevelsId
+        skillExperienceLevelsId
         userExperienceLevelsId
       }
       nextToken
@@ -283,14 +309,14 @@ export const listTechnologyExperienceLevels = /* GraphQL */ `
     }
   }
 `;
-export const syncTechnologyExperienceLevels = /* GraphQL */ `
-  query SyncTechnologyExperienceLevels(
-    $filter: ModelTechnologyExperienceLevelFilterInput
+export const syncSkillExperienceLevels = /* GraphQL */ `
+  query SyncSkillExperienceLevels(
+    $filter: ModelSkillExperienceLevelFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncTechnologyExperienceLevels(
+    syncSkillExperienceLevels(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -299,7 +325,7 @@ export const syncTechnologyExperienceLevels = /* GraphQL */ `
       items {
         id
         level
-        technology {
+        skill {
           id
           name
           createdAt
@@ -323,7 +349,7 @@ export const syncTechnologyExperienceLevels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        technologyExperienceLevelsId
+        skillExperienceLevelsId
         userExperienceLevelsId
       }
       nextToken
@@ -346,8 +372,22 @@ export const getUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          technologyExperienceLevelsId
+          skillExperienceLevelsId
           userExperienceLevelsId
+        }
+        nextToken
+        startedAt
+      }
+      projects {
+        items {
+          id
+          projectId
+          userId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         nextToken
         startedAt
@@ -372,6 +412,10 @@ export const listUsers = /* GraphQL */ `
         name
         email
         experienceLevels {
+          nextToken
+          startedAt
+        }
+        projects {
           nextToken
           startedAt
         }
@@ -407,6 +451,10 @@ export const syncUsers = /* GraphQL */ `
           nextToken
           startedAt
         }
+        projects {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -423,11 +471,15 @@ export const getProjectTechnologies = /* GraphQL */ `
     getProjectTechnologies(id: $id) {
       id
       projectId
-      technologyId
+      skillId
       project {
         id
         name
-        technologies {
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
           nextToken
           startedAt
         }
@@ -437,7 +489,7 @@ export const getProjectTechnologies = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      technology {
+      skill {
         id
         name
         projects {
@@ -476,7 +528,7 @@ export const listProjectTechnologies = /* GraphQL */ `
       items {
         id
         projectId
-        technologyId
+        skillId
         project {
           id
           name
@@ -486,7 +538,7 @@ export const listProjectTechnologies = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        technology {
+        skill {
           id
           name
           createdAt
@@ -522,7 +574,7 @@ export const syncProjectTechnologies = /* GraphQL */ `
       items {
         id
         projectId
-        technologyId
+        skillId
         project {
           id
           name
@@ -532,7 +584,7 @@ export const syncProjectTechnologies = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        technology {
+        skill {
           id
           name
           createdAt
@@ -570,7 +622,7 @@ export const projectTechnologiesByProjectId = /* GraphQL */ `
       items {
         id
         projectId
-        technologyId
+        skillId
         project {
           id
           name
@@ -580,7 +632,7 @@ export const projectTechnologiesByProjectId = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        technology {
+        skill {
           id
           name
           createdAt
@@ -600,16 +652,16 @@ export const projectTechnologiesByProjectId = /* GraphQL */ `
     }
   }
 `;
-export const projectTechnologiesByTechnologyId = /* GraphQL */ `
-  query ProjectTechnologiesByTechnologyId(
-    $technologyId: ID!
+export const projectTechnologiesBySkillId = /* GraphQL */ `
+  query ProjectTechnologiesBySkillId(
+    $skillId: ID!
     $sortDirection: ModelSortDirection
     $filter: ModelProjectTechnologiesFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    projectTechnologiesByTechnologyId(
-      technologyId: $technologyId
+    projectTechnologiesBySkillId(
+      skillId: $skillId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -618,7 +670,7 @@ export const projectTechnologiesByTechnologyId = /* GraphQL */ `
       items {
         id
         projectId
-        technologyId
+        skillId
         project {
           id
           name
@@ -628,9 +680,244 @@ export const projectTechnologiesByTechnologyId = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        technology {
+        skill {
           id
           name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getProjectUsers = /* GraphQL */ `
+  query GetProjectUsers($id: ID!) {
+    getProjectUsers(id: $id) {
+      id
+      projectId
+      userId
+      project {
+        id
+        name
+        skills {
+          nextToken
+          startedAt
+        }
+        users {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      user {
+        id
+        name
+        email
+        experienceLevels {
+          nextToken
+          startedAt
+        }
+        projects {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listProjectUsers = /* GraphQL */ `
+  query ListProjectUsers(
+    $filter: ModelProjectUsersFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProjectUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        projectId
+        userId
+        project {
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        user {
+          id
+          name
+          email
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncProjectUsers = /* GraphQL */ `
+  query SyncProjectUsers(
+    $filter: ModelProjectUsersFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncProjectUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        projectId
+        userId
+        project {
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        user {
+          id
+          name
+          email
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const projectUsersByProjectId = /* GraphQL */ `
+  query ProjectUsersByProjectId(
+    $projectId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelProjectUsersFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    projectUsersByProjectId(
+      projectId: $projectId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        projectId
+        userId
+        project {
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        user {
+          id
+          name
+          email
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const projectUsersByUserId = /* GraphQL */ `
+  query ProjectUsersByUserId(
+    $userId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelProjectUsersFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    projectUsersByUserId(
+      userId: $userId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        projectId
+        userId
+        project {
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        user {
+          id
+          name
+          email
           createdAt
           updatedAt
           _version

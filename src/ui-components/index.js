@@ -7,9 +7,9 @@
 export { default as studioTheme } from "./studioTheme";
 export { default as ProjectCreateForm } from "./ProjectCreateForm";
 export { default as ProjectUpdateForm } from "./ProjectUpdateForm";
-export { default as TechnologyCreateForm } from "./TechnologyCreateForm";
-export { default as TechnologyUpdateForm } from "./TechnologyUpdateForm";
-export { default as TechnologyExperienceLevelCreateForm } from "./TechnologyExperienceLevelCreateForm";
-export { default as TechnologyExperienceLevelUpdateForm } from "./TechnologyExperienceLevelUpdateForm";
+export { default as SkillCreateForm } from "./SkillCreateForm";
+export { default as SkillUpdateForm } from "./SkillUpdateForm";
+export { default as SkillExperienceLevelCreateForm } from "./SkillExperienceLevelCreateForm";
+export { default as SkillExperienceLevelUpdateForm } from "./SkillExperienceLevelUpdateForm";
 export { default as UserCreateForm } from "./UserCreateForm";
 export { default as UserUpdateForm } from "./UserUpdateForm";

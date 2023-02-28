@@ -16,7 +16,8 @@ type EagerProject = {
   };
   readonly id: string;
   readonly name: string;
-  readonly technologies?: (ProjectTechnologies | null)[] | null;
+  readonly skills?: (ProjectTechnologies | null)[] | null;
+  readonly users?: (ProjectUsers | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -28,7 +29,8 @@ type LazyProject = {
   };
   readonly id: string;
   readonly name: string;
-  readonly technologies: AsyncCollection<ProjectTechnologies>;
+  readonly skills: AsyncCollection<ProjectTechnologies>;
+  readonly users: AsyncCollection<ProjectUsers>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -39,72 +41,72 @@ export declare const Project: (new (init: ModelInit<Project>) => Project) & {
   copyOf(source: Project, mutator: (draft: MutableModel<Project>) => MutableModel<Project> | void): Project;
 }
 
-type EagerTechnology = {
+type EagerSkill = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Technology, 'id'>;
+    identifier: ManagedIdentifier<Skill, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly name: string;
   readonly projects?: (ProjectTechnologies | null)[] | null;
-  readonly experienceLevels?: (TechnologyExperienceLevel | null)[] | null;
+  readonly experienceLevels?: (SkillExperienceLevel | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
-type LazyTechnology = {
+type LazySkill = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Technology, 'id'>;
+    identifier: ManagedIdentifier<Skill, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly name: string;
   readonly projects: AsyncCollection<ProjectTechnologies>;
-  readonly experienceLevels: AsyncCollection<TechnologyExperienceLevel>;
+  readonly experienceLevels: AsyncCollection<SkillExperienceLevel>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
-export declare type Technology = LazyLoading extends LazyLoadingDisabled ? EagerTechnology : LazyTechnology
+export declare type Skill = LazyLoading extends LazyLoadingDisabled ? EagerSkill : LazySkill
 
-export declare const Technology: (new (init: ModelInit<Technology>) => Technology) & {
-  copyOf(source: Technology, mutator: (draft: MutableModel<Technology>) => MutableModel<Technology> | void): Technology;
+export declare const Skill: (new (init: ModelInit<Skill>) => Skill) & {
+  copyOf(source: Skill, mutator: (draft: MutableModel<Skill>) => MutableModel<Skill> | void): Skill;
 }
 
-type EagerTechnologyExperienceLevel = {
+type EagerSkillExperienceLevel = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<TechnologyExperienceLevel, 'id'>;
+    identifier: ManagedIdentifier<SkillExperienceLevel, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly level: ExperienceLevel | keyof typeof ExperienceLevel;
-  readonly technology?: Technology | null;
+  readonly skill?: Skill | null;
   readonly user?: User | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly technologyExperienceLevelsId?: string | null;
+  readonly skillExperienceLevelsId?: string | null;
   readonly userExperienceLevelsId?: string | null;
 }
 
-type LazyTechnologyExperienceLevel = {
+type LazySkillExperienceLevel = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<TechnologyExperienceLevel, 'id'>;
+    identifier: ManagedIdentifier<SkillExperienceLevel, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly level: ExperienceLevel | keyof typeof ExperienceLevel;
-  readonly technology: AsyncItem<Technology | undefined>;
+  readonly skill: AsyncItem<Skill | undefined>;
   readonly user: AsyncItem<User | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly technologyExperienceLevelsId?: string | null;
+  readonly skillExperienceLevelsId?: string | null;
   readonly userExperienceLevelsId?: string | null;
 }
 
-export declare type TechnologyExperienceLevel = LazyLoading extends LazyLoadingDisabled ? EagerTechnologyExperienceLevel : LazyTechnologyExperienceLevel
+export declare type SkillExperienceLevel = LazyLoading extends LazyLoadingDisabled ? EagerSkillExperienceLevel : LazySkillExperienceLevel
 
-export declare const TechnologyExperienceLevel: (new (init: ModelInit<TechnologyExperienceLevel>) => TechnologyExperienceLevel) & {
-  copyOf(source: TechnologyExperienceLevel, mutator: (draft: MutableModel<TechnologyExperienceLevel>) => MutableModel<TechnologyExperienceLevel> | void): TechnologyExperienceLevel;
+export declare const SkillExperienceLevel: (new (init: ModelInit<SkillExperienceLevel>) => SkillExperienceLevel) & {
+  copyOf(source: SkillExperienceLevel, mutator: (draft: MutableModel<SkillExperienceLevel>) => MutableModel<SkillExperienceLevel> | void): SkillExperienceLevel;
 }
 
 type EagerUser = {
@@ -115,7 +117,8 @@ type EagerUser = {
   readonly id: string;
   readonly name: string;
   readonly email: string;
-  readonly experienceLevels?: (TechnologyExperienceLevel | null)[] | null;
+  readonly experienceLevels?: (SkillExperienceLevel | null)[] | null;
+  readonly projects?: (ProjectUsers | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -128,7 +131,8 @@ type LazyUser = {
   readonly id: string;
   readonly name: string;
   readonly email: string;
-  readonly experienceLevels: AsyncCollection<TechnologyExperienceLevel>;
+  readonly experienceLevels: AsyncCollection<SkillExperienceLevel>;
+  readonly projects: AsyncCollection<ProjectUsers>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -146,9 +150,9 @@ type EagerProjectTechnologies = {
   };
   readonly id: string;
   readonly projectId?: string | null;
-  readonly technologyId?: string | null;
+  readonly skillId?: string | null;
   readonly project: Project;
-  readonly technology: Technology;
+  readonly skill: Skill;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -160,9 +164,9 @@ type LazyProjectTechnologies = {
   };
   readonly id: string;
   readonly projectId?: string | null;
-  readonly technologyId?: string | null;
+  readonly skillId?: string | null;
   readonly project: AsyncItem<Project>;
-  readonly technology: AsyncItem<Technology>;
+  readonly skill: AsyncItem<Skill>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -171,4 +175,38 @@ export declare type ProjectTechnologies = LazyLoading extends LazyLoadingDisable
 
 export declare const ProjectTechnologies: (new (init: ModelInit<ProjectTechnologies>) => ProjectTechnologies) & {
   copyOf(source: ProjectTechnologies, mutator: (draft: MutableModel<ProjectTechnologies>) => MutableModel<ProjectTechnologies> | void): ProjectTechnologies;
+}
+
+type EagerProjectUsers = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ProjectUsers, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly projectId?: string | null;
+  readonly userId?: string | null;
+  readonly project: Project;
+  readonly user: User;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyProjectUsers = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ProjectUsers, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly projectId?: string | null;
+  readonly userId?: string | null;
+  readonly project: AsyncItem<Project>;
+  readonly user: AsyncItem<User>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type ProjectUsers = LazyLoading extends LazyLoadingDisabled ? EagerProjectUsers : LazyProjectUsers
+
+export declare const ProjectUsers: (new (init: ModelInit<ProjectUsers>) => ProjectUsers) & {
+  copyOf(source: ProjectUsers, mutator: (draft: MutableModel<ProjectUsers>) => MutableModel<ProjectUsers> | void): ProjectUsers;
 }
