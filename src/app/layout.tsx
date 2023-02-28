@@ -1,7 +1,8 @@
 // Root Layout: https://beta.nextjs.org/docs/routing/pages-and-layouts#root-layout-required
-import '@/themes/global.css';
+import "@/themes/global.css";
 import { Lato } from "next/font/google";
-import 'normalize.css/normalize.css';
+import Script from "next/script";
+import "normalize.css/normalize.css";
 
 export const metadata = {
   title: "Atomic Design on Nextjs 13",
@@ -23,9 +24,11 @@ export default function RootLayout({
       */}
       <head />
       <body className={lato.className}>
-        {/* <Authenticator> */}
+        <Script
+          src="https://d3js.org/d3.v4.min.js"
+          strategy="beforeInteractive"
+        />
         {children}
-        {/* </Authenticator> */}
       </body>
     </html>
   );

@@ -30,6 +30,7 @@
       "@/models": ["src/models/index.js"],
       "@/graphql/*": ["src/graphql/*"],
       "@/API": ["src/API.ts"],
+      "@/utils/*": ["src/utils/*"],
       "@/themes/*": ["src/themes/*"]
     }
   },
