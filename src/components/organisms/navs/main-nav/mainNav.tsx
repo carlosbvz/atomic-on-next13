@@ -2,8 +2,8 @@ import Container from '@/atoms/containers/container';
 import Logo from '@/atoms/logos/logo';
 import Menu from '@/atoms/menu/menu';
 import MenuLink from '@/atoms/menu/menuLink';
-import Search from '@/molecules/search';
-import { Lato } from '@next/font/google';
+import Search from '@/molecules/search/search';
+import { Lato } from 'next/font/google';
 import styles from './mainNav.module.css';
 
 const latoBold = Lato({ weight: "700", subsets: ["latin"] });

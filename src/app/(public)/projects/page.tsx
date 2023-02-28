@@ -1,11 +1,14 @@
+import ExampleGrid from '@/molecules/grids/grid';
+
 export const metadata = {
   title: "Projects",
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage(props: any) {
   return (
     <>
       <h1>Projects</h1>
+      <ExampleGrid />
     </>
   );
 }
