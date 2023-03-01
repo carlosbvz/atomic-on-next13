@@ -43,8 +43,6 @@ const defaultProperties: ForcePropertiesType = {
 
 export default function Network(props: NetworkProps) {
   const { data, properties } = props;
-
-  if (!data) return null;
   const graphEl = useRef(null);
 
   useEffect(() => {
@@ -61,7 +59,7 @@ export default function Network(props: NetworkProps) {
     } else {
       console.log("D3 not loaded");
     }
-  }, [data]);
+  }, [data, properties]);
 
   return (
     <div>

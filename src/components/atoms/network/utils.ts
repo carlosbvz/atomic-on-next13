@@ -9,11 +9,11 @@ import {
 const Network = (function () {
   let d3: any;
   // svg objects
-  let svg: SvgTypeType,
-    link: GraphLinkType,
-    node: GraphNodeType,
-    width: number,
-    height: number;
+  let svg: SvgTypeType;
+  let link: GraphLinkType;
+  let node: GraphNodeType;
+  let width: number;
+  let height: number;
   // the data - an object with nodes and links
   let graph: GraphDataType;
   //////////// FORCE SIMULATION ////////////
@@ -142,9 +142,9 @@ const Network = (function () {
       })
       .attr(
         "stroke-width",
-        forceProperties.charge.enabled == false
-          ? 0
-          : Math.abs(forceProperties.charge.strength) / 15
+        forceProperties.charge.enabled
+          ? Math.abs(forceProperties.charge.strength) / 15
+          : 0
       );
 
     link

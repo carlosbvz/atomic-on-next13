@@ -1,8 +1,6 @@
 import Link from "@/atoms/links/link";
 
-type Props = {};
-
-export default function LinksPage(props: Props) {
+export default function LinksPage() {
   return (
     <div>
       <h3>Link Component</h3>

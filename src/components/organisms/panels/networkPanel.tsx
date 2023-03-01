@@ -1,17 +1,12 @@
 "use client";
 
-import Network, {
-  projectToNetworkAdapter,
-  ProjectToNetworkType,
-} from "@/atoms/network";
+import Network, { projectToNetworkAdapter } from "@/atoms/network";
 import { listProjects } from "@/services/projectServices";
 import { useEffect, useState } from "react";
 import mockData from "./graph.json";
 import mockData2 from "./graph2.json";
 
-type Props = {};
-
-export default function NetworkPanel(props: Props) {
+export default function NetworkPanel() {
   const [data, setData] = useState(mockData);
   const [projects, setProjects] = useState<any>(null);
 

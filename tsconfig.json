@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -21,18 +25,46 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/atoms/*": ["src/components/atoms/*"],
-      "@/molecules/*": ["src/components/molecules/*"],
-      "@/organisms/*": ["src/components/organisms/*"],
-      "@/sharedtemplates/*": ["src/components/shared-templates/*"],
-      "@/sharedlayouts/*": ["src/components/shared-layouts/*"],
-      "@/services/*": ["src/services/*"],
-      "@/graphql/*": ["src/graphql/*"],
-      "@/API": ["src/API.ts"],
-      "@/utils/*": ["src/utils/*"],
-      "@/themes/*": ["src/themes/*"]
+      "@/atoms/*": [
+        "src/components/atoms/*"
+      ],
+      "@/molecules/*": [
+        "src/components/molecules/*"
+      ],
+      "@/organisms/*": [
+        "src/components/organisms/*"
+      ],
+      "@/sharedtemplates/*": [
+        "src/components/shared-templates/*"
+      ],
+      "@/sharedlayouts/*": [
+        "src/components/shared-layouts/*"
+      ],
+      "@/services/*": [
+        "src/services/*"
+      ],
+      "@/graphql/*": [
+        "src/graphql/*"
+      ],
+      "@/API": [
+        "src/API.ts"
+      ],
+      "@/utils/*": [
+        "src/utils/*"
+      ],
+      "@/themes/*": [
+        "src/themes/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "/Users/cbenavides/Documents/Apps/atomic-on-next13/.next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -1,7 +1,6 @@
 // Root Layout: https://beta.nextjs.org/docs/routing/pages-and-layouts#root-layout-required
 import "@/themes/global.css";
-import { Lato } from "next/font/google";
-import Script from "next/script";
+import { Lato as latoFont } from "next/font/google";
 import "normalize.css/normalize.css";
 
 export const metadata = {
@@ -9,7 +8,7 @@ export const metadata = {
   description: "Example of how to use Atomic Design on a Nextjs 13 app",
 };
 
-const lato = Lato({ weight: "400", subsets: ["latin"] });
+const lato = latoFont({ weight: "400", subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -23,13 +22,8 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className={lato.className}>
-        <Script
-          src="https://d3js.org/d3.v4.min.js"
-          strategy="beforeInteractive"
-        />
-        {children}
-      </body>
+
+      <body className={lato.className}>{children}</body>
     </html>
   );
 }
