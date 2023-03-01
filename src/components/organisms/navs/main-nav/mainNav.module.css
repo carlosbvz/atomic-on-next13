@@ -3,12 +3,13 @@
 }
 .nav {
   display: flex;
-  padding: 64px 16px;
+  padding: 32px 16px;
   justify-content: space-between;
 }
 
 .menu-wrapper {
   display: flex;
+  align-items: center;
 }
 .menu {
   display: flex;

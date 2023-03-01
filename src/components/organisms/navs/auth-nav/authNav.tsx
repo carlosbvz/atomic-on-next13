@@ -1,8 +1,8 @@
 "use client";
 
-import Button from '@/atoms/buttons/button';
-import { signOut } from '@/services/auth-services/authServices';
-import styles from './authNav.module.css';
+import Button from "@/atoms/buttons/button";
+import { signOut } from "@/services/authServices";
+import styles from "./authNav.module.css";
 
 type Props = {};
 

@@ -1,14 +1,13 @@
 "use client";
 
-import NetworkCreator from "@/utils/networkCreator";
-import { useEffect, useRef, useState } from "react";
-import mockData from "./graph.json";
-import mockData2 from "./graph2.json";
+import { useEffect, useRef } from "react";
+import { ForcePropertiesType, NetworkProps } from "./types";
+import NetworkCreator from "./utils";
 
 declare const window: any;
 
-// values for all forces
-const forceProperties = {
+// Default values for all forces
+const defaultProperties: ForcePropertiesType = {
   center: {
     x: 0.5,
     y: 0.5,
@@ -42,20 +41,22 @@ const forceProperties = {
   },
 };
 
-type Props = {};
+export default function Network(props: NetworkProps) {
+  const { data, properties } = props;
 
-export default function Network(props: Props) {
-  const [data, setData] = useState(mockData);
+  if (!data) return null;
   const graphEl = useRef(null);
 
   useEffect(() => {
+    if (!data) return;
+
     const graphNode: any = graphEl.current;
     if (window.d3) {
       NetworkCreator.init({
         d3lib: window.d3,
         data,
         anchor: graphNode,
-        properties: forceProperties,
+        properties: properties || defaultProperties,
       });
     } else {
       console.log("D3 not loaded");
@@ -64,18 +65,6 @@ export default function Network(props: Props) {
 
   return (
     <div>
-      <button
-        onClick={() => {
-          if (data === mockData) {
-            setData(mockData2);
-          } else {
-            setData(mockData);
-          }
-        }}
-      >
-        Re Create
-      </button>
-
       <svg
         ref={graphEl}
         style={{

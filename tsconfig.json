@@ -27,7 +27,6 @@
       "@/sharedtemplates/*": ["src/components/shared-templates/*"],
       "@/sharedlayouts/*": ["src/components/shared-layouts/*"],
       "@/services/*": ["src/services/*"],
-      "@/models": ["src/models/index.js"],
       "@/graphql/*": ["src/graphql/*"],
       "@/API": ["src/API.ts"],
       "@/utils/*": ["src/utils/*"],

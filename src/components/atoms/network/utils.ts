@@ -1,12 +1,24 @@
+import {
+  ForcePropertiesType,
+  GraphDataType,
+  GraphLinkType,
+  GraphNodeType,
+  SvgTypeType,
+} from "./types";
+
 const Network = (function () {
   let d3: any;
   // svg objects
-  let svg: any, link: any, node: any, width: any, height: any;
+  let svg: SvgTypeType,
+    link: GraphLinkType,
+    node: GraphNodeType,
+    width: number,
+    height: number;
   // the data - an object with nodes and links
-  let graph: any;
+  let graph: GraphDataType;
   //////////// FORCE SIMULATION ////////////
   let simulation: any;
-  let forceProperties: any;
+  let forceProperties: ForcePropertiesType;
 
   // add forces to the simulation
   function initializeForces() {
@@ -39,7 +51,7 @@ const Network = (function () {
       });
 
     node
-      .attr("cx", function (d: { x: any }) {
+      ?.attr?.("cx", function (d: { x: any }) {
         return d.x;
       })
       .attr("cy", function (d: { y: any }) {
@@ -122,7 +134,7 @@ const Network = (function () {
   // update the display based on the forces (but not positions)
   function updateDisplay() {
     node
-      .attr("r", forceProperties.collide.radius)
+      .attr?.("r", forceProperties.collide.radius)
       // .attr("stroke", forceProperties.charge.strength > 0 ? "blue" : "red")
       .attr("stroke", "blue")
       .attr("fill", function (d: any) {
@@ -173,7 +185,7 @@ const Network = (function () {
       );
 
     // node tooltip
-    node.append("title").text(function (d: { id: any }) {
+    node?.append?.("title").text(function (d: { id: any }) {
       return d.id;
     });
     // visualize the graph
@@ -201,6 +213,7 @@ const Network = (function () {
     d3 = d3lib;
     forceProperties = properties;
     simulation = d3.forceSimulation();
+
     if (svg) {
       svg.selectAll("*").remove();
     }
