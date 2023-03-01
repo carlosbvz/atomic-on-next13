@@ -1,12 +1,9 @@
-import NextLink, { LinkProps as NextLinkProps } from "next/link";
-import styles from "./link.module.css";
+import NextLink, { LinkProps as NextLinkProps } from 'next/link';
+import styles from './link.module.css';
 
-export interface LinkProps extends NextLinkProps {
-  children?: React.ReactNode;
-  className?: string;
-}
+export type LinkType = NextLinkProps & React.HTMLAttributes<HTMLAnchorElement>;
 
-export default function Link(props: LinkProps) {
+export default function Link(props: LinkType) {
   return (
     <NextLink {...props} passHref legacyBehavior>
       <a className={styles.link}>{props?.children}</a>

@@ -1,9 +1,6 @@
-import Link, { LinkProps } from "@/atoms/links/link";
+import Link, { LinkType } from '@/atoms/links/link';
 
-interface Props extends LinkProps {
-  children?: React.ReactNode;
-  className?: string;
-}
+interface Props extends LinkType {}
 
 export default function MenuLink(props: Props) {
   return (
