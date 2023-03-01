@@ -13,8 +13,9 @@ export default function NetworkPanel() {
   useEffect(() => {
     async function loadData() {
       const projectsData = await listProjects();
-      console.log("projectsData", projectsData);
-      setProjects(projectToNetworkAdapter(projectsData));
+      setProjects(
+        projectToNetworkAdapter(projectsData.data?.listProjects?.items)
+      );
     }
     loadData();
   }, []);

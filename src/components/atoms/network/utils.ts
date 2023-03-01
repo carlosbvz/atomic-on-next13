@@ -24,7 +24,7 @@ const Network = (function () {
   function initializeForces() {
     // add forces and associate each with a name
     simulation
-      .force("link", d3.forceLink())
+      ?.force("link", d3.forceLink())
       .force("charge", d3.forceManyBody())
       .force("collide", d3.forceCollide())
       .force("center", d3.forceCenter())
@@ -37,7 +37,7 @@ const Network = (function () {
   // update the display positions after each simulation tick
   function ticked() {
     link
-      .attr("x1", function (d: any) {
+      ?.attr?.("x1", function (d: any) {
         return d.source.x;
       })
       .attr("y1", function (d: { source: { y: any } }) {
@@ -134,7 +134,7 @@ const Network = (function () {
   // update the display based on the forces (but not positions)
   function updateDisplay() {
     node
-      .attr?.("r", forceProperties.collide.radius)
+      ?.attr?.("r", forceProperties.collide.radius)
       // .attr("stroke", forceProperties.charge.strength > 0 ? "blue" : "red")
       .attr("stroke", "blue")
       .attr("fill", function (d: any) {
@@ -148,7 +148,7 @@ const Network = (function () {
       );
 
     link
-      .attr("stroke-width", forceProperties.link.enabled ? 1 : 0.5)
+      ?.attr("stroke-width", forceProperties.link.enabled ? 1 : 0.5)
       .attr("opacity", forceProperties.link.enabled ? 1 : 0);
   }
   // convenience function to update everything (run after UI input)
@@ -161,20 +161,20 @@ const Network = (function () {
   function initializeDisplay() {
     // set the data and properties of link lines
     link = svg
-      .append("g")
+      ?.append?.("g")
       .attr("class", "links")
       .selectAll("line")
       .data(graph.links)
-      .enter()
+      .enter?.()
       .append("line");
 
     // set the data and properties of node circles
     node = svg
-      .append("g")
+      ?.append?.("g")
       .attr("class", "nodes")
       .selectAll("circle")
       .data(graph.nodes)
-      .enter()
+      .enter?.()
       .append("circle")
       .call(
         d3
@@ -193,7 +193,7 @@ const Network = (function () {
   }
   // set up the simulation and event to update locations after each tick
   function initializeSimulation() {
-    simulation.nodes(graph.nodes);
+    simulation.nodes(graph?.nodes);
     initializeForces();
     simulation.on("tick", ticked);
   }
@@ -209,31 +209,35 @@ const Network = (function () {
     anchor: any;
     properties: any;
   }) {
-    // Set up
-    d3 = d3lib;
-    forceProperties = properties;
-    simulation = d3.forceSimulation();
+    try {
+      // Set up
+      d3 = d3lib;
+      forceProperties = properties;
+      simulation = d3.forceSimulation();
 
-    if (svg) {
-      svg.selectAll("*").remove();
-    }
+      if (svg) {
+        svg.selectAll("*").remove();
+      }
 
-    svg = d3.select(anchor);
+      svg = d3.select(anchor);
 
-    width = +svg.node().getBoundingClientRect().width;
-    height = +svg.node().getBoundingClientRect().height;
-    graph = data;
-
-    // Initialize
-    initializeDisplay();
-    initializeSimulation();
-
-    // update size-related forces
-    d3.select(window).on("resize", function () {
       width = +svg.node().getBoundingClientRect().width;
       height = +svg.node().getBoundingClientRect().height;
-      updateForces();
-    });
+      graph = data;
+
+      // Initialize
+      initializeDisplay();
+      initializeSimulation();
+
+      // update size-related forces
+      d3.select(window).on("resize", function () {
+        width = +svg.node().getBoundingClientRect().width;
+        height = +svg.node().getBoundingClientRect().height;
+        updateForces();
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return {

@@ -1,11 +1,10 @@
-import { Project } from "../../../models";
-
 export interface NetworkProps {
   data: GraphDataType;
   properties?: ForcePropertiesType;
 }
 
-export type ProjectToNetworkType = Project[];
+// TODO: Type this
+export type ProjectToNetworkType = any;
 
 export type ForcePropertiesType = {
   center: {
