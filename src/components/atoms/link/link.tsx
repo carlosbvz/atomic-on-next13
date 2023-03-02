@@ -1,7 +1,6 @@
-import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import styles from './link.module.css';
-
-export type LinkType = NextLinkProps & React.HTMLAttributes<HTMLAnchorElement>;
+import NextLink from "next/link";
+import styles from "./link.module.css";
+import { LinkType } from "./types";
 
 export default function Link(props: LinkType) {
   return (

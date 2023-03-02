@@ -3,9 +3,16 @@ export interface NetworkProps {
   properties?: ForcePropertiesType;
 }
 
-// TODO: Type this
-export type ProjectToNetworkType = any;
-
+/**
+ * This is an interesting case.
+ * There is a model type called Project which in escence
+ * represents the Project's schema (from graphQL).
+ * We are not using that type, but creating a new type,
+ * so that this component can remain isolated (as an atom)
+ */
+export type ProjectAdapterType = {
+  name: string;
+};
 export type ForcePropertiesType = {
   center: {
     x: number;

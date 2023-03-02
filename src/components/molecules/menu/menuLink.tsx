@@ -1,4 +1,4 @@
-import Link, { LinkType } from '@/atoms/links/link';
+import Link, { LinkType } from "@/atoms/link";
 
 interface Props extends LinkType {}
 

@@ -1,4 +1,4 @@
-import Link from "@/atoms/links/link";
+import Link from "@/atoms/link";
 
 export default function LinksPage() {
   return (

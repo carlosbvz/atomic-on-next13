@@ -13,5 +13,9 @@ export default function Button(props: ButtonProps) {
   ].join(" ");
 
   const buttonProps = { ...props, className: joinedClasses };
-  return <button {...buttonProps}>{props?.children}</button>;
+  return (
+    <>
+      <button {...buttonProps}>{props?.children}</button>
+    </>
+  );
 }

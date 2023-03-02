@@ -1,6 +1,6 @@
 "use client";
 
-import Button from '@/atoms/button';
+import Button from "@/atoms/button";
 
 export default function Search() {
   function handleOnClick() {

@@ -1,9 +1,8 @@
-import { Project } from "../../../models";
-import { GraphDataType, ProjectToNetworkType } from "./types";
+import { GraphDataType, ProjectAdapterType } from "./types";
 
-function getNodes(data: ProjectToNetworkType) {
+function getNodes(data: ProjectAdapterType[]) {
   return (
-    data?.map?.((project: Project, index: number) => {
+    data?.map?.((project: ProjectAdapterType, index: number) => {
       return {
         id: project.name,
         group: index,
@@ -19,7 +18,7 @@ function getNodes(data: ProjectToNetworkType) {
  * @returns  Network
  */
 export function projectToNetworkAdapter(
-  data: ProjectToNetworkType
+  data: ProjectAdapterType[]
 ): GraphDataType {
   console.log("data", data);
 

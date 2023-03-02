@@ -1,7 +1,7 @@
 import Container from "@/atoms/containers/container";
 import Logo from "@/atoms/logos/logo";
-import Menu from "@/atoms/menu/menu";
-import MenuLink from "@/atoms/menu/menuLink";
+import Menu from "@/molecules/menu/menu";
+import MenuLink from "@/molecules/menu/menuLink";
 import Search from "@/molecules/search/search";
 import { Lato as latoFont } from "next/font/google";
 import styles from "./mainNav.module.css";
