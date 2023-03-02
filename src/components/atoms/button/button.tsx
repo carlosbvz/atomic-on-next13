@@ -1,11 +1,7 @@
-import styles from './button.module.css';
+import styles from "./button.module.css";
+import { ButtonProps } from "./types";
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: "primary" | "secondary";
-  variant?: "contained" | "outlined" | "text";
-}
-
-export default function Button(props: Props) {
+export default function Button(props: ButtonProps) {
   const colorClass = props?.color || "primary";
   const variantClass = props?.variant || "text";
 

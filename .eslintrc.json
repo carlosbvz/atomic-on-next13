@@ -13,7 +13,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "atomic-design"],
   "rules": {
     "require-jsdoc": "off",
     "spaced-comment": "off",
