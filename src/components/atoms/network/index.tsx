@@ -1,4 +1,3 @@
-import { projectToNetworkAdapter } from "@/adapters/projectToNetworkAdapter";
 import Network from "./network";
 import {
   ForcePropertiesType,
@@ -10,7 +9,6 @@ import {
 } from "./types";
 
 export default Network;
-export { projectToNetworkAdapter };
 export type {
   ForcePropertiesType,
   GraphDataType,

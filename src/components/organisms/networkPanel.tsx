@@ -1,8 +1,9 @@
 "use client";
 
-import Network, { projectToNetworkAdapter } from '@/atoms/network';
-import { listProjects } from '@/services/projectServices';
-import { useEffect, useState } from 'react';
+import { projectToNetworkAdapter } from "@/adapters/projectToNetworkAdapter";
+import Network from "@/atoms/network";
+import { listProjects } from "@/services/projectServices";
+import { useEffect, useState } from "react";
 
 export default function NetworkPanel() {
   const [projects, setProjects] = useState<any>(null);
