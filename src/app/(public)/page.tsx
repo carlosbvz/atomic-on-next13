@@ -1,5 +1,5 @@
-import NetworkPanel from "@/organisms/panels/networkPanel";
-import Script from "next/script";
+import NetworkPanel from '@/organisms/networkPanel';
+import Script from 'next/script';
 
 export default function Home() {
   return (

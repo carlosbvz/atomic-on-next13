@@ -1,4 +1,4 @@
-import { projectToNetworkAdapter } from "./adapters";
+import { projectToNetworkAdapter } from "@/adapters/projectToNetworkAdapter";
 import Network from "./network";
 import {
   ForcePropertiesType,
@@ -6,7 +6,6 @@ import {
   GraphLinkType,
   GraphNodeType,
   NetworkProps,
-  ProjectToNetworkType,
   SvgTypeType,
 } from "./types";
 
@@ -18,6 +17,5 @@ export type {
   GraphLinkType,
   GraphNodeType,
   NetworkProps,
-  ProjectToNetworkType,
   SvgTypeType,
 };

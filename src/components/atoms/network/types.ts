@@ -8,7 +8,8 @@ export interface NetworkProps {
  * There is a model type called Project which in escence
  * represents the Project's schema (from graphQL).
  * We are not using that type, but creating a new type,
- * so that this component can remain isolated (as an atom)
+ * so that this component can remain isolated (as an atom),
+ * Not good idea...
  */
 export type ProjectAdapterType = {
   name: string;

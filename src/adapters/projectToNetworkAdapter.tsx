@@ -1,4 +1,4 @@
-import { GraphDataType, ProjectAdapterType } from "./types";
+import { GraphDataType, ProjectAdapterType } from "@/atoms/network/types";
 
 function getNodes(data: ProjectAdapterType[]) {
   return (

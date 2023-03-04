@@ -1,4 +1,4 @@
-import ExampleGrid from "@/molecules/grids/grid";
+import ExampleGrid from '@/molecules/grid';
 
 export const metadata = {
   title: "Projects",

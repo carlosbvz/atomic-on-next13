@@ -1,10 +1,13 @@
-import Container from "@/atoms/containers/container";
-import Logo from "@/atoms/logos/logo";
-import Menu from "@/molecules/menu/menu";
-import MenuLink from "@/molecules/menu/menuLink";
-import Search from "@/molecules/search/search";
-import { Lato as latoFont } from "next/font/google";
-import styles from "./mainNav.module.css";
+"use client";
+
+import Container from '@/atoms/container';
+import Logo from '@/atoms/logo';
+import Menu from '@/molecules/menu';
+import MenuLink from '@/molecules/menuLink';
+import Search from '@/molecules/search';
+import { Lato as latoFont } from 'next/font/google';
+import styled from 'styled-components';
+import styles from './mainNav.module.css';
 
 const latoBold = latoFont({ weight: "700", subsets: ["latin"] });
 const linksData = [
@@ -13,6 +16,10 @@ const linksData = [
   { href: "/technologies", label: "Technologies" },
   { href: "/people", label: "People" },
 ];
+
+const StyledMenuWrapper = styled.div`
+  border-bottom: 1px solid var(--lightGray);
+`;
 
 function StyledMenuLink(props: { href: string; children?: React.ReactNode }) {
   const { href, children } = props;
@@ -43,13 +50,13 @@ function MenuWrapper() {
 
 export default function Navigation() {
   return (
-    <div className={styles["nav-wrapper"]}>
+    <StyledMenuWrapper>
       <Container maxWidth="2xl">
         <nav className={styles.nav}>
           <Logo />
           <MenuWrapper />
         </nav>
       </Container>
-    </div>
+    </StyledMenuWrapper>
   );
 }

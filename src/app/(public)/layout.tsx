@@ -1,4 +1,4 @@
-import Container from '@/atoms/containers/container';
+import Container from '@/atoms/container';
 import AuthNav from '@/organisms/auth-nav/authNav';
 import Footer from '@/organisms/footer/footer';
 import Navigation from '@/organisms/main-nav/mainNav';

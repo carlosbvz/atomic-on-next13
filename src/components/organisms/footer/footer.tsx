@@ -1,5 +1,5 @@
-import Container from "@/atoms/containers/container";
-import styles from "./footer.module.css";
+import Container from '@/atoms/container';
+import styles from './footer.module.css';
 
 export default function Footer() {
   return (
