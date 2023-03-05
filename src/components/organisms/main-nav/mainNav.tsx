@@ -1,13 +1,12 @@
 "use client";
 
-import Container from '@/atoms/container';
-import Logo from '@/atoms/logo';
-import Menu from '@/molecules/menu';
-import MenuLink from '@/molecules/menuLink';
-import Search from '@/molecules/search';
-import { Lato as latoFont } from 'next/font/google';
-import styled from 'styled-components';
-import styles from './mainNav.module.css';
+import Container from "@/atoms/container";
+import Logo from "@/atoms/logo";
+import Menu from "@/molecules/menu";
+import MenuLink from "@/molecules/menuLink";
+import Search from "@/molecules/search";
+import { Lato as latoFont } from "next/font/google";
+import styled from "styled-components";
 
 interface LinkType {
   href: string;
@@ -16,46 +15,60 @@ interface LinkType {
 
 const latoBold = latoFont({ weight: "700", subsets: ["latin"] });
 
-const StyledMenuWrapper = styled.div`
+const StyledNavWrapper = styled.div`
   border-bottom: 1px solid var(--lightGray);
 `;
-
-function StyledMenuLink(props: { href: string; children?: React.ReactNode }) {
-  const { href, children } = props;
-  return (
-    <MenuLink
-      className={`${styles["menu-links"]} ${latoBold.className}`}
-      href={href}
-    >
-      {children}
-    </MenuLink>
-  );
-}
+const StyledMenuWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const StyledMenu = styled(Menu)`
+  display: flex;
+  align-items: center;
+`;
+const StyledMenuLink = styled(MenuLink)`
+  margin-right: 16px;
+  font-size: 18px;
+  ${latoBold.style}
+  a {
+    font-size: 1.25em;
+    color: var(--black);
+    :hover {
+      text-decoration: none;
+      color: var(--blue);
+    }
+  }
+`;
+const StyledNav = styled.nav`
+  display: flex;
+  padding: 32px 16px;
+  justify-content: space-between;
+`;
 
 function MenuWrapper({ links }: { links: LinkType[] }) {
   return (
-    <div className={styles["menu-wrapper"]}>
-      <Menu className={styles["menu"]}>
+    <StyledMenuWrapper>
+      <StyledMenu>
         {links.map((link) => (
           <StyledMenuLink key={link.href} href={link.href}>
             {link.label}
           </StyledMenuLink>
         ))}
-      </Menu>
+      </StyledMenu>
       <Search />
-    </div>
+    </StyledMenuWrapper>
   );
 }
 
 export default function Navigation({ links }: { links: LinkType[] }) {
   return (
-    <StyledMenuWrapper>
+    <StyledNavWrapper>
       <Container maxWidth="2xl">
-        <nav className={styles.nav}>
+        <StyledNav>
           <Logo />
           <MenuWrapper links={links} />
-        </nav>
+        </StyledNav>
       </Container>
-    </StyledMenuWrapper>
+    </StyledNavWrapper>
   );
 }

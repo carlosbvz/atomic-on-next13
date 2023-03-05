@@ -13,6 +13,14 @@ export interface NetworkProps {
  */
 export type ProjectAdapterType = {
   name: string;
+  skills: {
+    items: {
+      skill: {
+        id: string;
+        name: string;
+      };
+    }[];
+  };
 };
 export type ForcePropertiesType = {
   center: {

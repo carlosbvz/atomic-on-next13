@@ -1,16 +1,5 @@
 import { GraphDataType, ProjectAdapterType } from "@/atoms/network/types";
 
-function getNodes(data: ProjectAdapterType[]) {
-  return (
-    data?.map?.((project: ProjectAdapterType, index: number) => {
-      return {
-        id: project.name,
-        group: index,
-      };
-    }) || []
-  );
-}
-
 /**
  * @description This is a wrapper for the Network component
  * when using Project data
@@ -20,10 +9,41 @@ function getNodes(data: ProjectAdapterType[]) {
 export function projectToNetworkAdapter(
   data: ProjectAdapterType[]
 ): GraphDataType {
-  console.log("data", data);
+  const nodes: any = [];
+  const links: any = [];
+
+  data?.forEach?.((project: ProjectAdapterType, index: number) => {
+    const { name: projectName } = project;
+
+    project.skills?.items?.forEach?.((skill) => {
+      const { name: skillName } = skill?.skill || {};
+      if (!skillName) return;
+
+      // Has to be always created
+      links.push({
+        source: skillName,
+        target: projectName,
+        value: index,
+      });
+
+      // Check if the node already exists
+      const nodeExists = nodes.find((node: any) => node.id === skillName);
+      if (nodeExists) return;
+      nodes.push({
+        id: skillName,
+        group: index,
+        color: "red",
+      });
+    });
+
+    nodes.push({
+      id: projectName,
+      group: index,
+    });
+  });
 
   return {
-    nodes: getNodes(data),
-    links: [],
+    nodes,
+    links,
   };
 }

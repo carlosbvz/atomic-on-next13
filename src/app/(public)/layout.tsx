@@ -1,7 +1,7 @@
-import Container from '@/atoms/container';
-import AuthNav from '@/organisms/auth-nav/authNav';
-import Footer from '@/organisms/footer/footer';
-import Navigation from '@/organisms/main-nav/mainNav';
+import Container from "@/atoms/container";
+import AuthNav from "@/organisms/auth-nav/authNav";
+import Navigation from "@/organisms/main-nav/mainNav";
+// import Footer from "@/organisms/footer/footer";
 
 const menuLinks = [
   { href: "/", label: "Home" },
@@ -22,7 +22,7 @@ export default function PublicLayout({
       <main>
         <Container maxWidth="2xl">{children}</Container>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
