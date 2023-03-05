@@ -4,6 +4,20 @@ import { projectToNetworkAdapter } from "@/adapters/projectToNetworkAdapter";
 import Network from "@/atoms/network";
 import { listProjects } from "@/services/projectServices";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+
+const StyledNetworkPanel = styled.div`
+  svg {
+    flex-basis: 100%;
+    min-width: 200px;
+  }
+  .links line {
+    stroke: #aaa;
+  }
+  .nodes circle {
+    pointer-events: all;
+  }
+`;
 
 export default function NetworkPanel() {
   const [projects, setProjects] = useState<any>(null);
@@ -19,8 +33,8 @@ export default function NetworkPanel() {
   }, []);
 
   return (
-    <div>
+    <StyledNetworkPanel>
       <Network data={projects} />
-    </div>
+    </StyledNetworkPanel>
   );
 }
