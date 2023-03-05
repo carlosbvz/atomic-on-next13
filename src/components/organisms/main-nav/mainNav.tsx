@@ -15,6 +15,11 @@ interface LinkType {
 
 const latoBold = latoFont({ weight: "700", subsets: ["latin"] });
 
+const StyledNav = styled.nav`
+  display: flex;
+  padding: 16px;
+  justify-content: space-between;
+`;
 const StyledNavWrapper = styled.div`
   border-bottom: 1px solid var(--lightGray);
 `;
@@ -38,11 +43,6 @@ const StyledMenuLink = styled(MenuLink)`
       color: var(--blue);
     }
   }
-`;
-const StyledNav = styled.nav`
-  display: flex;
-  padding: 32px 16px;
-  justify-content: space-between;
 `;
 
 function MenuWrapper({ links }: { links: LinkType[] }) {
