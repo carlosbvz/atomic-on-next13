@@ -1,4 +1,9 @@
-import { GraphDataType, ProjectAdapterType } from '@/organisms/network/types';
+import { GraphDataType } from '@/utils/NetworkUtils';
+import { Project, Skill } from '../models';
+
+// TODO: Better type this file
+type ProjectToNetworkType = Project & any;
+type SkillToNetworkType = Skill & any;
 
 /**
  * @description This is a wrapper for the Network component
@@ -7,15 +12,15 @@ import { GraphDataType, ProjectAdapterType } from '@/organisms/network/types';
  * @returns  Network
  */
 export function projectToNetworkAdapter(
-  data: ProjectAdapterType[]
+  data: ProjectToNetworkType[]
 ): GraphDataType {
   const nodes: any = [];
   const links: any = [];
 
-  data?.forEach?.((project: ProjectAdapterType, index: number) => {
+  data?.forEach?.((project: ProjectToNetworkType, index: number) => {
     const { name: projectName } = project;
 
-    project.skills?.items?.forEach?.((skill) => {
+    project.skills?.items?.forEach?.((skill: SkillToNetworkType) => {
       const { name: skillName } = skill?.skill || {};
       if (!skillName) return;
 

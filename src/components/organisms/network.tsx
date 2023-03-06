@@ -1,10 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { ForcePropertiesType, NetworkProps } from "./types";
-import NetworkCreator from "./utils";
+import NetworkCreator, { ForcePropertiesType, GraphDataType, GraphNodeType } from '@/utils/NetworkUtils';
+import { useEffect, useRef } from 'react';
+import styled from 'styled-components';
+
+export interface NetworkProps {
+  data: GraphDataType;
+  properties?: ForcePropertiesType;
+}
 
 declare const window: any;
+
+const StyledSvg = styled.svg`
+  width: 100%;
+  height: 500px;
+`;
 
 // Default values for all forces
 const defaultProperties: ForcePropertiesType = {
@@ -42,34 +52,25 @@ const defaultProperties: ForcePropertiesType = {
 };
 
 export default function Network(props: NetworkProps) {
-  const { data, properties } = props;
+  const { data, properties = defaultProperties } = props;
   const graphEl = useRef(null);
 
   useEffect(() => {
     if (!data) return;
 
-    const graphNode: any = graphEl.current;
-    if (window.d3) {
+    const anchor: GraphNodeType | null = graphEl.current;
+    const d3lib = window?.d3;
+    if (d3lib) {
       NetworkCreator.init({
-        d3lib: window.d3,
+        d3lib,
         data,
-        anchor: graphNode,
-        properties: properties || defaultProperties,
+        anchor,
+        properties,
       });
     } else {
       console.log("D3 not loaded");
     }
   }, [data, properties]);
 
-  return (
-    <div>
-      <svg
-        ref={graphEl}
-        style={{
-          width: "100%",
-          height: "500px",
-        }}
-      ></svg>
-    </div>
-  );
+  return <StyledSvg ref={graphEl} />;
 }
