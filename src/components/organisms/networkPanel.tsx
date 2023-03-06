@@ -1,10 +1,10 @@
 "use client";
 
-import { projectToNetworkAdapter } from "@/adapters/projectToNetworkAdapter";
-import Network from "@/atoms/network";
-import { listProjects } from "@/services/projectServices";
-import { useEffect, useState } from "react";
-import styled from "styled-components";
+import { projectToNetworkAdapter } from '@/adapters/projectToNetworkAdapter';
+import Network from '@/organisms/network';
+import { listProjects } from '@/services/projectServices';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const StyledNetworkPanel = styled.div`
   svg {

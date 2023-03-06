@@ -1,6 +1,6 @@
-import Container from "@/atoms/container";
-import AuthNav from "@/organisms/auth-nav/authNav";
-import Navigation from "@/organisms/main-nav/mainNav";
+import Container from '@/atoms/container';
+import AuthNav from '@/organisms/authNav';
+import Navigation from '@/organisms/mainNav';
 // import Footer from "@/organisms/footer/footer";
 
 const menuLinks = [

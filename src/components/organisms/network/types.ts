@@ -1,3 +1,5 @@
+import { Project } from '../../../models';
+
 export interface NetworkProps {
   data: GraphDataType;
   properties?: ForcePropertiesType;
@@ -11,17 +13,7 @@ export interface NetworkProps {
  * so that this component can remain isolated (as an atom),
  * Not good idea...
  */
-export type ProjectAdapterType = {
-  name: string;
-  skills: {
-    items: {
-      skill: {
-        id: string;
-        name: string;
-      };
-    }[];
-  };
-};
+export type ProjectAdapterType = Project;
 export type ForcePropertiesType = {
   center: {
     x: number;

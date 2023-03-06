@@ -1,4 +1,4 @@
-import { GraphDataType, ProjectAdapterType } from "@/atoms/network/types";
+import { GraphDataType, ProjectAdapterType } from '@/organisms/network/types';
 
 /**
  * @description This is a wrapper for the Network component
